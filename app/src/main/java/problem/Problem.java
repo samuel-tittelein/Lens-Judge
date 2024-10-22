@@ -7,13 +7,37 @@ import TestCase;
 
 public class Problem implements Iterable<TestCase>{
 
+    private final List<TestCase> testCasesList;
+    private final int timeLimit;
+    private final int memoryLimit;
+    private final IVerifier verifier;
+
     public Problem(ProblemBuilder b){
-        //TODO
+        this.testCasesList = b.getTestCasesList();
+        this.timeLimit = b.getTimeLimit();
+        this.memoryLimit = b.getMemoryLimit();
+        this.verifier = b.getVerifier();
+    }
+
+    public List<TestCase> getTestCasesList() {
+        return testCasesList;
+    }
+
+    public int getTimeLimit() {
+        return timeLimit;
+    }
+
+    public int getMemoryLimit() {
+        return memoryLimit;
+    }
+
+    public IVerifier getVerifier() {
+        return verifier;
     }
 
     @Override
     public Iterator<TestCase> iterator() {
-        return null;
+        return TestCase.iterator();
     }
 
     @Override
