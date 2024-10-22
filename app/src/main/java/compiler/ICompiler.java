@@ -12,15 +12,15 @@ public interface ICompiler {
 
     /**
      * Deduce from the name of the source file the name of the compiled binary.
-     * @param sourceFile
+     * @param sourceFile The source file
      * @return String the name of the binary file
      */
     String binName(File sourceFile);
 
     /**
      * run the compiler command
-     * @param sourceFile
-     * @return
+     * @param sourceFile The source file
+     * @return File the compiled binary
      */
     File compile(File sourceFile);
 }
