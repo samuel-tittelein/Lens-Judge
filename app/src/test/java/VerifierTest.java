@@ -2,20 +2,37 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class VerifierTest {
-@Test
+
+    @Test
     public void verifyTest() throws IOException {
-    IVerifier verifier = new Verifier();
-    File expectedFile = new File("expected.txt");
-    File actualCorrectFile = new File("actual_correct.txt");
-    File actualIncorrectFile = new File("actual_incorrect.txt");
+        IVerifier verifier = new Verifier();
 
-    assertTrue(verifier.verify(expectedFile, actualCorrectFile));
-    assertFalse(verifier.verify(expectedFile, actualIncorrectFile));
+        File expectedFile = getFileFromResources("expected.txt");
+        File actualCorrectFile = getFileFromResources("actual_correct.txt");
+        File actualIncorrectFile = getFileFromResources("actual_incorrect.txt");
+        File actualMissingLineFile = getFileFromResources("actual_missing_line.txt");
+        File actualMoreLine = getFileFromResources("actual_more_line.txt");
 
-}
+        assertTrue(verifier.verify(expectedFile, actualCorrectFile));
+        assertFalse(verifier.verify(expectedFile, actualIncorrectFile));
+        assertFalse(verifier.verify(expectedFile, actualMissingLineFile));
+        assertFalse(verifier.verify(expectedFile, actualMoreLine));
+    }
+
+    private File getFileFromResources(String fileName) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource(fileName);
+
+        if (resource == null) {
+            throw new IllegalArgumentException("File not found: " + fileName);
+        }
+
+        return new File(resource.getFile());
+    }
 }
