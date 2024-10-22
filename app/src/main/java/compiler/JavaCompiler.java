@@ -9,7 +9,7 @@ public class JavaCompiler extends AbstractCompiler implements ICompiler {
     @Override
     public File compile(File sourceFile) throws IllegalArgumentException {
 
-        String sourceDirectory = sourceFile.getAbsolutePath();
+        String sourceDirectory = sourceFile.getParentFile().getAbsolutePath();
         ArrayList<String> cmd = new ArrayList<>(
                 List.of("javac", "-d", sourceDirectory, sourceFile.getName())
         );
