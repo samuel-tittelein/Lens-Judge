@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import verifier.IVerifier;
 
 public class Problem implements Iterable<TestCase>{
 

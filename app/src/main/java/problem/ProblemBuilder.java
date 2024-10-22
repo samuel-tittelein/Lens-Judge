@@ -1,5 +1,7 @@
 package problem;
 
+import verifier.IVerifier;
+
 import java.util.List;
 
 public class ProblemBuilder {

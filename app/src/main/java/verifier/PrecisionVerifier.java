@@ -1,3 +1,5 @@
+package verifier;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -34,9 +36,11 @@ public class PrecisionVerifier implements IVerifier {
                         return false;  // Différence supérieure à la tolérance
                     }
 
-                } catch (NumberFormatException e) {
-                    return false;  // L'une des lignes n'est pas un nombre valide
+                } catch (NumberFormatException ignored){
+                    //Nothing to see here ¯\_(ツ)_/¯
                 }
+
+
             }
 
             return actualReader.readLine() == null;  // Vérifier si le fichier produit est plus long

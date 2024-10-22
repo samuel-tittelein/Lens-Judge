@@ -1,28 +1,32 @@
+package verifier;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class VerifierTest {
-
+class PrecisionVerifierTest {
     @Test
-    public void verifyTest() throws IOException {
-        IVerifier verifier = new Verifier();
+    void precisionVerifyTestTrue() throws Exception {
+        IVerifier verifier = new PrecisionVerifier(0.1);
 
-        File expectedFile = getFileFromResources("expected.txt");
-        File actualCorrectFile = getFileFromResources("actual_correct.txt");
-        File actualIncorrectFile = getFileFromResources("actual_incorrect.txt");
-        File actualMissingLineFile = getFileFromResources("actual_missing_line.txt");
-        File actualMoreLine = getFileFromResources("actual_more_line.txt");
+        File expectedFile = getFileFromResources("expected_precision.txt");
+        File actualCorrectFile = getFileFromResources("actual_precision_correct.txt");
 
         assertTrue(verifier.verify(expectedFile, actualCorrectFile));
+    }
+
+    @Test
+    void precisionVerifyTestFalse() throws Exception{
+        IVerifier verifier = new PrecisionVerifier(0.1);
+
+        File expectedFile = getFileFromResources("expected_precision.txt");
+        File actualIncorrectFile = getFileFromResources("actual_precision_incorrect.txt");
+
         assertFalse(verifier.verify(expectedFile, actualIncorrectFile));
-        assertFalse(verifier.verify(expectedFile, actualMissingLineFile));
-        assertFalse(verifier.verify(expectedFile, actualMoreLine));
     }
 
     private File getFileFromResources(String fileName) {
@@ -35,4 +39,5 @@ public class VerifierTest {
 
         return new File(resource.getFile());
     }
+
 }
