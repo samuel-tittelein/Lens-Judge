@@ -35,9 +35,10 @@ public class Problem implements Iterable<TestCase>{
         return verifier;
     }
 
+
     @Override
     public Iterator<TestCase> iterator() {
-        return TestCase.iterator();
+        return testCasesList.iterator();
     }
 
     @Override
