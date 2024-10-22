@@ -1,11 +1,11 @@
 import java.io.File;
 
-public class testCase {
+public class TestCase {
 
     private File inputFile;
     private File outputFile;
 
-    public testCase(File inputFile, File outputFile) {
+    public TestCase(File inputFile, File outputFile) {
         this.inputFile = inputFile;
         this.outputFile = outputFile;
     }
