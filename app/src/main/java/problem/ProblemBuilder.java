@@ -1,5 +1,6 @@
 package problem;
-import TestCase;
+
+import java.util.List;
 
 public class ProblemBuilder {
 
@@ -17,7 +18,6 @@ public class ProblemBuilder {
 
     /**
      *
-     * @param testCasesList
      * @return the instance of ProblemBuilder, with its testCasesList initialized
      */
     public ProblemBuilder withTestCasesList(List<TestCase> testCasesList){
@@ -35,7 +35,6 @@ public class ProblemBuilder {
 
     /**
      *
-     * @param timeLimit
      * @return the instance of ProblemBuilder, with its timeLimit initialized
      */
     public ProblemBuilder withTimeLimit(int timeLimit){
@@ -53,7 +52,6 @@ public class ProblemBuilder {
 
     /**
      *
-     * @param memoryLimit
      * @return the instance of ProblemBuilder, with its memoryLimit initialized
      */
     public ProblemBuilder withMemoryLimit(int memoryLimit){
@@ -71,7 +69,6 @@ public class ProblemBuilder {
 
     /**
      *
-     * @param verifier
      * @return the instance of ProblemBuilder, with its verifier initialized
      */
     public ProblemBuilder withVerifier(IVerifier verifier){

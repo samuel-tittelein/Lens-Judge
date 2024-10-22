@@ -1,9 +1,9 @@
 package problem;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
-import TestCase;
 
 public class Problem implements Iterable<TestCase>{
 
@@ -34,7 +34,6 @@ public class Problem implements Iterable<TestCase>{
     public IVerifier getVerifier() {
         return verifier;
     }
-
 
     @Override
     public Iterator<TestCase> iterator() {
