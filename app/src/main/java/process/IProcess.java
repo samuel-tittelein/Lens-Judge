@@ -10,7 +10,7 @@ public interface IProcess {
      *
      * @param command The command to execute.
      */
-    void startProcess(String command) throws IOException;
+    void startProcess(List<String> command) throws IOException;
 
     /**
      * Stop the current process
