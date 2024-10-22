@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class VerifierTest {
 @Test
     public void verifyTest() throws IOException {
-    Verifier verifier = new Verifier();
+    IVerifier verifier = new Verifier();
     File expectedFile = new File("expected.txt");
     File actualCorrectFile = new File("actual_correct.txt");
     File actualIncorrectFile = new File("actual_incorrect.txt");

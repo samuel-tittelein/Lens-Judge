@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class PrecisionVerifier extends Verifier {
+public class PrecisionVerifier implements IVerifier {
     private final double tolerance;
 
     public PrecisionVerifier(double tolerance) {

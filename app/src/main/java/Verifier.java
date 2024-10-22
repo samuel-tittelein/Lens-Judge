@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Verifier {
+public class Verifier implements IVerifier {
     public boolean verify(File expectedFile, File actualFile) throws IOException {
         try (BufferedReader expectedReader = new BufferedReader(new FileReader(expectedFile));
              BufferedReader actualReader = new BufferedReader(new FileReader(actualFile))) {
