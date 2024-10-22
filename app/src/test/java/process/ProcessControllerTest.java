@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProcessControllerTest {
 
-    private ProcessController processController;
+    private IProcess processController;
 
     @BeforeEach
     void setUp() {
