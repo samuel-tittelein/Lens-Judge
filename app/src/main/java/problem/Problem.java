@@ -3,6 +3,7 @@ package problem;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import TestCase;
 
 public class Problem implements Iterable<TestCase>{
 
