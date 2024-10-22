@@ -9,6 +9,7 @@ public class TimedProcessController implements IProcess {
     private final IProcess decoratedProcess;
     private final long timeoutInMillis;
     private Timer timer;
+    private RuntimeException timeoutException;  // Shared variable for exception
 
     public TimedProcessController(IProcess decoratedProcess, long timeoutInMillis) {
         this.decoratedProcess = decoratedProcess;
@@ -19,13 +20,14 @@ public class TimedProcessController implements IProcess {
     public void startProcess(List<String> command) throws IOException {
         // Start the timer to limit execution time
         timer = new Timer(true);
-        //This timer will stop the process after the timeout
+        timeoutException = null;
+
+        // This timer will stop the process after the timeout
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                // Stop the process when the timer triggers
-                System.out.println("Time limit exceeded. Stopping the process.");
                 stopProcess();
+                timeoutException = new RuntimeException("Time limit exceeded. Stopping the process.");
             }
         }, timeoutInMillis);
 
@@ -43,13 +45,22 @@ public class TimedProcessController implements IProcess {
         }
     }
 
+    /**
+     *
+     * @throws RuntimeException If the process times out.
+     */
     @Override
-    public void waitForCompletion() throws InterruptedException {
+    public void waitForCompletion() throws InterruptedException, RuntimeException {
         decoratedProcess.waitForCompletion();
 
         // If the process finishes normally, cancel the timer
         if (timer != null) {
             timer.cancel();
+        }
+
+        // Check if the timeout exception was thrown in the timer task
+        if (timeoutException != null) {
+            throw timeoutException;
         }
     }
 

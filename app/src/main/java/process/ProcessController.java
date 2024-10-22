@@ -13,7 +13,7 @@ public class ProcessController implements IProcess {
     private StringBuilder errorOutput;
 
     @Override
-    public void startProcess(List<String> command) throws IOException {
+    public void startProcess(List<String> command) throws IOException{
         ProcessBuilder processBuilder = new ProcessBuilder(command);
         process = processBuilder.start();
         standardOutput = new StringBuilder();
