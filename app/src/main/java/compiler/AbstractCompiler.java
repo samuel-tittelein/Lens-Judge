@@ -3,6 +3,7 @@ package compiler;
 import process.IProcess;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * This class implements the interface ICompiler
@@ -81,8 +82,8 @@ public class AbstractCompiler implements ICompiler {
         String extension = getExtension(sourceFile);
         ICompiler compiler = switch (extension) {
             case "java" -> new JavaCompiler();
-            case "c" -> new CCompiler();
-            case "cxx", "cc", "cpp" -> new CppCompiler();
+            case "c" -> new CCompiler(CCompilerEnum.C);
+            case "cxx", "cc", "cpp" -> new CCompiler(CCompilerEnum.CPP);
             case "py" -> new PythonCompiler();
             default -> throw wrongExtension;
         };

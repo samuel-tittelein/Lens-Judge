@@ -7,12 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CCompiler extends AbstractCompiler implements ICompiler {
+    protected List<String> args;
+
+    public CCompiler(CCompilerEnum compiler) {
+        switch (compiler) {
+            case C:
+                args = List.of("gcc", "-x", "c", "-Wall", "-O2", "-pipe", "-lm", "-o", "exe");
+                break;
+            case CPP:
+                args = List.of("g++", "-x", "c++", "-Wall", "-O2", "-pipe", "-o", "exe");
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported compiler");
+        }
+    }
 
     @Override
     public File compile(File sourceFile) throws IllegalArgumentException {
-        ArrayList<String> cmd = new ArrayList<>(
-                List.of("gcc", "-x", "c", "-Wall", "-O2", "-static", "-pipe", "-lm", "-o", "exe", sourceFile.getAbsolutePath())
-        );
+        List<String> cmd = new ArrayList<>(args);
+        cmd.add(sourceFile.getAbsolutePath());
         try {
             processController.startProcess(cmd);
             processController.waitForCompletion();
