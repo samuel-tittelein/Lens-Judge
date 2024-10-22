@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Verifier implements IVerifier {
-    public boolean verify(File expectedFile, File actualFile) throws IOException {
+    public boolean verify(File expectedFile, File actualFile) {
         try (BufferedReader expectedReader = new BufferedReader(new FileReader(expectedFile));
              BufferedReader actualReader = new BufferedReader(new FileReader(actualFile))) {
 
