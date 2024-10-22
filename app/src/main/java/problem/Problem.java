@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+
+import org.jetbrains.annotations.NotNull;
 import verifier.IVerifier;
 
 public class Problem implements Iterable<TestCase>{
@@ -60,7 +62,7 @@ public class Problem implements Iterable<TestCase>{
      * @return the iterator associated with the list of test cases
      */
     @Override
-    public Iterator<TestCase> iterator() {
+    public @NotNull Iterator<TestCase> iterator() {
         return testCasesList.iterator();
     }
 
