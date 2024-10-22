@@ -1,10 +1,18 @@
 package compiler;
 
+import process.IProcess;
+
 import java.io.File;
 
+/**
+ * This class implements the interface ICompiler
+ *
+ * I apologize to 3rd grade student for the bad code quality
+ */
 public class AbstractCompiler implements ICompiler {
     private final IllegalArgumentException wrongExtension = new IllegalArgumentException(
             "The source file has an unsupported extension.");
+    protected IProcess processController;
 
     protected String getExtension(File sourceFile) throws IllegalArgumentException {
         String fileName = sourceFile.getName();
