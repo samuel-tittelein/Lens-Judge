@@ -28,9 +28,8 @@ public interface IProcess {
      * get the standard Output of the process as a string.
      *
      * @return The standard output.
-     * @throws IOException If an error occurs while reading the standard output.
      */
-    String getStandardOutput() throws IOException;
+    String getStandardOutput();
 
     /**
      * Write the standard output to a file.
@@ -44,9 +43,8 @@ public interface IProcess {
      * get the error Output of the process as a string
      *
      * @return The error output.
-     * @throws IOException If an error occurs while reading the error output.
      */
-    String getErrorOutput() throws IOException;
+    String getErrorOutput();
 
     /**
      * Returns if the process is finished.
