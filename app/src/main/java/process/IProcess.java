@@ -1,4 +1,4 @@
-package java.process;
+package process;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,6 +31,14 @@ public interface IProcess {
      * @throws IOException If an error occurs while reading the standard output.
      */
     String getStandardOutput() throws IOException;
+
+    /**
+     * Write the standard output to a file.
+     *
+     * @param fileOutputName The name of the file to write the standard output to.
+     * @throws IOException If an error occurs while writing the standard output to the file.
+     */
+    void writeStandardOutputToFile(String fileOutputName) throws IOException;
 
     /**
      * get the error Output of the process as a string
