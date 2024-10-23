@@ -1,6 +1,7 @@
 package process;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -62,6 +63,11 @@ public class TimedProcessController implements IProcess {
         if (timeoutException != null) {
             throw timeoutException;
         }
+    }
+
+    @Override
+    public void provideInput(InputStream input) throws IOException {
+        decoratedProcess.provideInput(input);
     }
 
     @Override
