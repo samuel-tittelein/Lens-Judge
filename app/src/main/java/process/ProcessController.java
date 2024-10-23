@@ -1,9 +1,6 @@
 package process;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.List;
 
 public class ProcessController implements IProcess {
@@ -38,6 +35,21 @@ public class ProcessController implements IProcess {
                 captureOutput();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    // Method to provide input to the running process
+    // Copy Pasted from StackOverflow, can't really understand how it works yet
+    public void provideInput(InputStream input) throws IOException {
+        if (process != null && process.getOutputStream() != null) {
+            try (BufferedOutputStream out = new BufferedOutputStream(process.getOutputStream())) {
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = input.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
+                out.flush(); // Ensure all data is sent to the process
             }
         }
     }

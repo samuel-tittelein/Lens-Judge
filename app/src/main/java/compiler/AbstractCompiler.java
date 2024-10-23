@@ -17,7 +17,7 @@ public class AbstractCompiler implements ICompiler {
 
 
 
-    protected String getExtension(File sourceFile) throws IllegalArgumentException {
+    public static String getExtension(File sourceFile) throws IllegalArgumentException {
         String fileName = sourceFile.getName();
         int dotIndex = fileName.lastIndexOf('.');
         if (dotIndex == -1) {
