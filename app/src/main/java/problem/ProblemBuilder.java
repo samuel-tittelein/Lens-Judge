@@ -90,7 +90,7 @@ public class ProblemBuilder {
      *
      * @return a new instance of ProblemBuilder
      */
-    public ProblemBuilder newInstance(){
+    public static ProblemBuilder newInstance(){
         return new ProblemBuilder();
     }
 
