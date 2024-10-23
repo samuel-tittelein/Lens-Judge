@@ -1,6 +1,7 @@
 package process;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public interface IProcess {
@@ -23,6 +24,13 @@ public interface IProcess {
      * @throws InterruptedException If the process is interrupted.
      */
     void waitForCompletion() throws InterruptedException;
+
+    /**
+     * Sends input to the process.
+     * @param input
+     * @throws IOException
+     */
+    void provideInput(InputStream input) throws IOException;
 
     /**
      * get the standard Output of the process as a string.
