@@ -56,15 +56,13 @@ public class Main {
 
             boolean result = runner.verifyProgram();
             if (result) {
-                System.out.println(ANSI_GREEN + "Test passed in " + (end - start) + " miliseconds !" + ANSI_RESET);
+                System.out.println(ANSI_GREEN + "Test passed in " + (end - start) + " milliseconds !" + ANSI_RESET);
             } else {
                 System.out.println(ANSI_RED + "Test failed" + ANSI_RESET);
             }
 
 
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
