@@ -17,7 +17,7 @@ public class RunnerBuilder {
     File inputFile;
     TestCase testCase;
 
-    private RunnerBuilder(){
+    RunnerBuilder(){
         super();
     }
 
