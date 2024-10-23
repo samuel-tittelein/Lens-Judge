@@ -9,7 +9,7 @@ public class RunnerBuilder {
     File sourceFile;
     File expectedOutputFile;
     File inputFile;
-    Long timeInMs = 1000L;
+    long timeInMs = 1000;
     TestCase testCase;
     IVerifier verifier;
 
@@ -33,7 +33,7 @@ public class RunnerBuilder {
         return this;
     }
 
-    public RunnerBuilder withTimeInMs(Long timeInMs){
+    public RunnerBuilder withTimeInMs(long timeInMs){
         this.timeInMs = timeInMs;
         return this;
     }
