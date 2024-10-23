@@ -17,7 +17,7 @@ public class PythonExecuter implements IExecuter {
 
     @Override
     public void execute(File file) throws IOException, InterruptedException {
-        process.startProcess(List.of("python", file.getAbsolutePath()));
+        process.startProcess(List.of("python3", file.getAbsolutePath()));
         process.waitForCompletion();
         process.writeStandardOutputToFile(file.getName() + ".out");
     }
