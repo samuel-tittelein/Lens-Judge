@@ -8,12 +8,14 @@ public class TestCase {
     private File inputProgramFile;
     private File inputFile;
     private File outputFile;
+    private long timeInMs;
 
-    public TestCase(File inputProgramFile, File inputFile, File outputFile) {
+    public TestCase(File inputProgramFile, File inputFile, File outputFile, long timeInMs) {
 
         this.inputProgramFile = inputProgramFile;
         this.inputFile = inputFile;
         this.outputFile = outputFile;
+        this.timeInMs = timeInMs;
     }
 
     public File getInputProgramFile() {
@@ -41,4 +43,10 @@ public class TestCase {
     public void setInputFile(File inputFile) {
         this.inputFile = inputFile;
     }
+
+    public long getTimeInMs() {
+
+        return timeInMs;
+    }
+
 }

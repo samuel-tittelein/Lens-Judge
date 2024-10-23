@@ -13,7 +13,7 @@ public class JavaExecuterTest {
     @Test
     void testJava() throws IOException, InterruptedException {
         IExecuter pythonExecuter = new ExecuterProxy();
-        pythonExecuter.execute(getFileFromResources("test.class"), getFileFromResources("test.in"));
+        pythonExecuter.execute(getFileFromResources("test.class"), getFileFromResources("test.in"),1000 );
         File file = new File("test.class.out");
         assertTrue(file.exists());
     }

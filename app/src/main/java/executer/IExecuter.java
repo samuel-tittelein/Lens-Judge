@@ -12,5 +12,5 @@ public interface IExecuter {
      * @throws IOException
      * @throws InterruptedException
      */
-    void execute(File file, File input) throws IOException, InterruptedException;
+    void execute(File file, File input, long timeInMs) throws IOException, InterruptedException;
 }

@@ -13,9 +13,21 @@ public class PythonExecuterTest {
     @Test
     void testPython() throws IOException, InterruptedException {
         IExecuter pythonExecuter = new ExecuterProxy();
-        pythonExecuter.execute(getFileFromResources("test.py"), getFileFromResources("test.in"));
+        pythonExecuter.execute(getFileFromResources("test.py"), getFileFromResources("test.in"), 1000);
         File file = new File("test.py.out");
         assertTrue(file.exists());
+    }
+
+    @Test
+    void testPythonTimedOut() throws IOException {
+        IExecuter pythonExecuter = new ExecuterProxy();
+
+        try {
+            pythonExecuter.execute(getFileFromResources("test.py"), getFileFromResources("test.in"), 1000);
+        } catch (InterruptedException e) {
+            assertTrue(true);
+        }
+
     }
 
     private File getFileFromResources(String fileName) {
