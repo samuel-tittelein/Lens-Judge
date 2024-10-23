@@ -1,6 +1,7 @@
 package runner;
 
 import org.junit.jupiter.api.Test;
+import verifier.Verifier;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class RunnerTest {
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
                 .withSourceFile(getFileFromResources("test.py"))
+                .withVerifier(new Verifier())
                 .build();
         assertTrue(runner.verifyProgram());
     }
@@ -25,6 +27,7 @@ public class RunnerTest {
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
                 .withSourceFile(getFileFromResources("test.c"))
+                .withVerifier(new Verifier())
                 .build();
         assertTrue(runner.verifyProgram());
     }
@@ -35,6 +38,7 @@ public class RunnerTest {
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
                 .withSourceFile(getFileFromResources("test.cc"))
+                .withVerifier(new Verifier())
                 .build();
         assertTrue(runner.verifyProgram());
     }
@@ -45,6 +49,7 @@ public class RunnerTest {
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
                 .withSourceFile(getFileFromResources("test.java"))
+                .withVerifier(new Verifier())
                 .build();
         assertTrue(runner.verifyProgram());
     }
