@@ -9,7 +9,7 @@ public class ExecuterProxy implements IExecuter {
     private IExecuter executer;
 
     @Override
-    public void execute(File file, File input) throws IOException, InterruptedException {
+    public void execute(File file, File input, long timeInMs) throws IOException, InterruptedException {
         if (file == null)
             throw new RuntimeException("The file is null.");
         try{
@@ -22,7 +22,7 @@ public class ExecuterProxy implements IExecuter {
         catch (IllegalArgumentException e){
             executer = new CExecuter();
         }
-        executer.execute(file, input);
+        executer.execute(file, input, timeInMs);
     }
 
 

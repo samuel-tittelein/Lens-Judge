@@ -2,6 +2,7 @@ package executer;
 
 import process.IProcess;
 import process.ProcessController;
+import process.TimedProcessController;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,12 +13,9 @@ public class JavaExecuter implements IExecuter {
 
     private IProcess process;
 
-    public JavaExecuter() {
-        process = new ProcessController();
-    }
-
     @Override
-    public void execute(File file, File input) throws IOException, InterruptedException {
+    public void execute(File file, File input, long timeInMs) throws IOException, InterruptedException {
+        process = new TimedProcessController(new ProcessController(), timeInMs);
         process.startProcess(List.of("java", file.getAbsolutePath()));
         if (input != null && input.exists()) {
             try (FileInputStream fis = new FileInputStream(input)) {

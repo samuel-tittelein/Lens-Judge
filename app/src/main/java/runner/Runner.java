@@ -41,7 +41,8 @@ public class Runner {
 
     public void runFile() throws IOException, InterruptedException {
         IExecuter executer = new ExecuterProxy();
-        executer.execute(compiledFile, testCase.getInputFile());
+        executer.execute(compiledFile, testCase.getInputFile(),
+                testCase.getTimeInMs());
         outputFile = new File(compiledFile.getName() + ".out");
     }
 }

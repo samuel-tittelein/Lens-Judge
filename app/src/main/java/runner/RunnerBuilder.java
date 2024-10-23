@@ -7,6 +7,7 @@ public class RunnerBuilder {
     File sourceFile;
     File expectedOutputFile;
     File inputFile;
+    Long timeInMs;
     TestCase testCase;
 
 
@@ -29,6 +30,11 @@ public class RunnerBuilder {
         return this;
     }
 
+    public RunnerBuilder withTimeInMs(Long timeInMs){
+        this.timeInMs = timeInMs;
+        return this;
+    }
+
     public static RunnerBuilder newInstance(){
         return new RunnerBuilder();
     }
@@ -39,7 +45,7 @@ public class RunnerBuilder {
     }
 
     public Runner build(){
-        testCase = new TestCase(sourceFile, inputFile, expectedOutputFile);
+        testCase = new TestCase(sourceFile, inputFile, expectedOutputFile, timeInMs);
         return new Runner(this);
     }
 

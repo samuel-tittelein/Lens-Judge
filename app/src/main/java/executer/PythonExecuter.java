@@ -2,6 +2,7 @@ package executer;
 
 import process.IProcess;
 import process.ProcessController;
+import process.TimedProcessController;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,9 +13,6 @@ public class PythonExecuter implements IExecuter {
 
     private IProcess process;
 
-    public PythonExecuter() {
-        process = new ProcessController();
-    }
 
     /**
      * Executes a Python script and optionally passes an input file.
@@ -25,17 +23,16 @@ public class PythonExecuter implements IExecuter {
      * @throws InterruptedException
      */
     @Override
-    public void execute(File file, File input) throws IOException, InterruptedException {
+    public void execute(File file, File input, long timeInMs) throws IOException, InterruptedException {
+        process = new TimedProcessController(new ProcessController(), timeInMs);
+
         process.startProcess(List.of("python3", file.getAbsolutePath()));
-
         if (input != null && input.exists()) {
-            try (FileInputStream fis = new FileInputStream(input)) {
+           try (FileInputStream fis = new FileInputStream(input)) {
                 process.provideInput(fis);
-            }
+           }
         }
-
         process.waitForCompletion();
-
         process.writeStandardOutputToFile(file.getName() + ".out");
     }
 }
