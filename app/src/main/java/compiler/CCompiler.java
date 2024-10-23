@@ -1,10 +1,8 @@
 package compiler;
 
-import process.IProcess;
 import process.ProcessController;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +35,15 @@ public class CCompiler extends AbstractCompiler implements ICompiler {
         processController = new ProcessController();
     }
 
+    /**
+     * run the compiler command
+     * @param sourceFile The source file
+     * @return
+     * @throws IllegalArgumentException
+     */
     @Override
     public File compile(File sourceFile) throws IllegalArgumentException {
+        //cmd is the list of string that represent the command that will be executed
         List<String> cmd = new ArrayList<>(args);
         String bin = binName(sourceFile);
 
