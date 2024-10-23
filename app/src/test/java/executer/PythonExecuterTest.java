@@ -12,8 +12,8 @@ public class PythonExecuterTest {
 
     @Test
     void testPython() throws IOException, InterruptedException {
-        IExecuter pythonExecuter = new PythonExecuter();
-        pythonExecuter.execute(getFileFromResources("test.py"));
+        IExecuter pythonExecuter = new ExecuterProxy();
+        pythonExecuter.execute(getFileFromResources("test.py"), getFileFromResources("test.in"));
         File file = new File("test.py.out");
         assertTrue(file.exists());
     }
