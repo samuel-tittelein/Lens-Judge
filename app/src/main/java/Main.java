@@ -1,19 +1,34 @@
 import compiler.ICompiler;
 import executer.IExecuter;
 import problem.Problem;
+import runner.Runner;
+import runner.RunnerBuilder;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
-    private ICompiler compiler;
-    private IExecuter executer;
-    private Problem problem;
-
 
     public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println("Enter the file name to test");
-            System.out.println("Enter the directory where ");
+        if (args.length != 3) {
+            return;
         }
+        File sourceFile = new File(args[0]);
+        File inFile = new File(args[1]);
+        File outFile = new File(args[2]);
 
+        RunnerBuilder builder = new RunnerBuilder();
+        Runner runner = builder.withExpectedOutputFile(outFile)
+                .withInputFile(inFile)
+                .withSourceFile(sourceFile)
+                .build();
+
+        try {
+            runner.runFile();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
     }
-
 }

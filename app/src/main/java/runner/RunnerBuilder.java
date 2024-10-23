@@ -14,7 +14,7 @@ public class RunnerBuilder {
     IVerifier verifier;
 
 
-    RunnerBuilder(){
+    public RunnerBuilder(){
         super();
     }
 
