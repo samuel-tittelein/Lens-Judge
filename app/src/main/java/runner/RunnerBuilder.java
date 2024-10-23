@@ -11,7 +11,7 @@ public class RunnerBuilder {
     TestCase testCase;
 
 
-    RunnerBuilder(){
+    public RunnerBuilder(){
         super();
     }
 
