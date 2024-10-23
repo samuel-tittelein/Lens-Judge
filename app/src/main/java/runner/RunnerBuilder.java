@@ -2,6 +2,7 @@ package runner;
 
 import problem.TestCase;
 import verifier.IVerifier;
+import verifier.Verifier;
 
 import java.io.File;
 
@@ -9,9 +10,9 @@ public class RunnerBuilder {
     File sourceFile;
     File expectedOutputFile;
     File inputFile;
-    long timeInMs = 1000;
+    long timeInMs = 1000; // Default time limit is 1 second
     TestCase testCase;
-    IVerifier verifier;
+    IVerifier verifier = new Verifier(); // Default verifier is the strict one
 
 
     RunnerBuilder(){
