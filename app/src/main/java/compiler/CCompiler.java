@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class CCompiler extends AbstractCompiler implements ICompiler {
     protected List<String> args;
-    public static final String OUTPUT_FILENAME = "exe";
 
     /**
      * Construct
@@ -41,8 +40,9 @@ public class CCompiler extends AbstractCompiler implements ICompiler {
     @Override
     public File compile(File sourceFile) throws IllegalArgumentException {
         List<String> cmd = new ArrayList<>(args);
+        String bin = binName(sourceFile);
 
-        cmd.add(OUTPUT_FILENAME);
+        cmd.add(bin);
         cmd.add(sourceFile.getAbsolutePath());
 
         try {
@@ -52,7 +52,7 @@ public class CCompiler extends AbstractCompiler implements ICompiler {
             System.out.println(e.getMessage());
         }
 
-        return new File(getOutputDirectory(sourceFile) + "/" + OUTPUT_FILENAME);
+        return new File(bin);
     }
 
 }

@@ -1,8 +1,6 @@
 package compiler;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class JavaCompiler extends AbstractCompiler implements ICompiler {
@@ -10,10 +8,15 @@ public class JavaCompiler extends AbstractCompiler implements ICompiler {
     public File compile(File sourceFile) throws IllegalArgumentException {
 
         String sourceDirectory = sourceFile.getParentFile().getAbsolutePath();
-        ArrayList<String> cmd = new ArrayList<>(
-                List.of("javac", "-d", sourceDirectory, sourceFile.getName())
-        );
-        System.out.println(cmd);
-        return null;
+        List<String> cmd = List.of("javac", "-d", sourceDirectory, sourceFile.getName());
+
+        try {
+            processController.startProcess(cmd);
+            processController.waitForCompletion();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return new File(binName(sourceFile));
     }
 }

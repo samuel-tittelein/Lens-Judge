@@ -3,7 +3,6 @@ package compiler;
 import process.IProcess;
 
 import java.io.File;
-import java.util.List;
 
 /**
  * This class implements the interface ICompiler
@@ -11,9 +10,12 @@ import java.util.List;
  * I apologize to 3rd grade student for the bad code quality
  */
 public class AbstractCompiler implements ICompiler {
-    private final IllegalArgumentException wrongExtension = new IllegalArgumentException(
+    private static final IllegalArgumentException WRONG_EXTENSION = new IllegalArgumentException(
             "The source file has an unsupported extension.");
+
     protected IProcess processController;
+
+
 
     protected String getExtension(File sourceFile) throws IllegalArgumentException {
         String fileName = sourceFile.getName();
@@ -52,20 +54,28 @@ public class AbstractCompiler implements ICompiler {
      */
     @Override
     public String binName(File sourceFile) throws IllegalArgumentException {
-        String fileName = sourceFile.getName();
 
+        String fileName = sourceFile.getAbsolutePath();
         int dotIndex = fileName.lastIndexOf('.');
         if (dotIndex == -1) {
             throw new IllegalArgumentException("The source file has no extension");
         }
         String binName = fileName.substring(0, dotIndex);
         String extension = fileName.substring(dotIndex+1).toLowerCase();
-        return switch (extension) {
-            case "java" -> binName + ".class";
-            case "c", "cxx", "cc", "cpp" -> "exe";
-            case "py" -> binName + ".py";
-            default -> throw wrongExtension;
-        };
+        switch (extension) {
+            case "java" :
+                binName += ".class";
+                break;
+            case "c", "cxx", "cc", "cpp" :
+                binName = binName.substring(0, fileName.lastIndexOf('/') + 1) + "exe";
+                break;
+            case "py":
+                binName = fileName;
+                break;
+            default :
+                throw WRONG_EXTENSION;
+        }
+        return binName;
     }
 
     /**
@@ -78,7 +88,7 @@ public class AbstractCompiler implements ICompiler {
     @Override
     public File compile(File sourceFile) throws IllegalArgumentException {
         if (!isCompatible(sourceFile)) {
-            throw wrongExtension;
+            throw WRONG_EXTENSION;
         }
         String extension = getExtension(sourceFile);
         ICompiler compiler = switch (extension) {
@@ -86,7 +96,7 @@ public class AbstractCompiler implements ICompiler {
             case "c" -> new CCompiler(CCompilerEnum.C);
             case "cxx", "cc", "cpp" -> new CCompiler(CCompilerEnum.CPP);
             case "py" -> new PythonCompiler();
-            default -> throw wrongExtension;
+            default -> throw WRONG_EXTENSION;
         };
         return compiler.compile(sourceFile);
     }
@@ -106,5 +116,14 @@ public class AbstractCompiler implements ICompiler {
         outputDirectory.mkdirs();
         return outputDirectory.getAbsolutePath();
     }
+
+    public String getOutputDirectory(String source) throws IllegalArgumentException {
+        File sourceFile = new File(getClass().getClassLoader().getResource(source).getFile());
+        if (sourceFile == null){
+            throw new IllegalArgumentException("Source file does not exist");
+        }
+        return getOutputDirectory(sourceFile);
+    }
+
 
 }
