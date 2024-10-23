@@ -1,14 +1,17 @@
 package runner;
 
 import problem.TestCase;
+import verifier.IVerifier;
+
 import java.io.File;
 
 public class RunnerBuilder {
     File sourceFile;
     File expectedOutputFile;
     File inputFile;
-    Long timeInMs;
+    Long timeInMs = 1000L;
     TestCase testCase;
+    IVerifier verifier;
 
 
     RunnerBuilder(){
@@ -44,8 +47,13 @@ public class RunnerBuilder {
         return testCase;
     }
 
+    public RunnerBuilder withVerifier(IVerifier verifier){
+        this.verifier = verifier;
+        return this;
+    }
+
     public Runner build(){
-        testCase = new TestCase(sourceFile, inputFile, expectedOutputFile, timeInMs);
+        testCase = new TestCase(sourceFile, inputFile, expectedOutputFile, timeInMs, verifier);
         return new Runner(this);
     }
 

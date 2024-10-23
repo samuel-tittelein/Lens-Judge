@@ -1,5 +1,7 @@
 package problem;
 
+import verifier.IVerifier;
+
 import java.io.File;
 import java.util.Iterator;
 
@@ -9,13 +11,15 @@ public class TestCase {
     private File inputFile;
     private File outputFile;
     private long timeInMs;
+    private IVerifier verifier;
 
-    public TestCase(File inputProgramFile, File inputFile, File outputFile, long timeInMs) {
+    public TestCase(File inputProgramFile, File inputFile, File outputFile, long timeInMs, IVerifier verifier) {
 
         this.inputProgramFile = inputProgramFile;
         this.inputFile = inputFile;
         this.outputFile = outputFile;
         this.timeInMs = timeInMs;
+        this.verifier = verifier;
     }
 
     public File getInputProgramFile() {
@@ -47,6 +51,11 @@ public class TestCase {
     public long getTimeInMs() {
 
         return timeInMs;
+    }
+
+    public IVerifier getVerifier() {
+
+        return verifier;
     }
 
 }
