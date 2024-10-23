@@ -13,14 +13,7 @@ public class JavaCompiler extends AbstractCompiler implements ICompiler {
         ArrayList<String> cmd = new ArrayList<>(
                 List.of("javac", "-d", sourceDirectory, sourceFile.getName())
         );
-        try {
-            processController.startProcess(cmd);
-            processController.waitForCompletion();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        return new File(this.binName(sourceFile));
+        System.out.println(cmd);
+        return null;
     }
-
 }

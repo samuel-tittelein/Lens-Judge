@@ -53,15 +53,16 @@ public class AbstractCompiler implements ICompiler {
     @Override
     public String binName(File sourceFile) throws IllegalArgumentException {
         String fileName = sourceFile.getName();
+
         int dotIndex = fileName.lastIndexOf('.');
         if (dotIndex == -1) {
             throw new IllegalArgumentException("The source file has no extension");
         }
-        String binName = fileName.substring(0, dotIndex-1).toLowerCase();
+        String binName = fileName.substring(0, dotIndex);
         String extension = fileName.substring(dotIndex+1).toLowerCase();
         return switch (extension) {
             case "java" -> binName + ".class";
-            case "c", "cxx", "cc", "cpp" -> binName + ".o";
+            case "c", "cxx", "cc", "cpp" -> "exe";
             case "py" -> binName + ".py";
             default -> throw wrongExtension;
         };
@@ -88,6 +89,22 @@ public class AbstractCompiler implements ICompiler {
             default -> throw wrongExtension;
         };
         return compiler.compile(sourceFile);
+    }
+
+    /**
+     * pardon les 3eme années ToT
+     * @param sourceFile
+     * @return
+     * @throws IllegalArgumentException
+     */
+    public String getOutputDirectory(File sourceFile) throws IllegalArgumentException {
+        File sourceDirectory = sourceFile.getParentFile();
+        if (sourceDirectory == null) {
+            throw new IllegalArgumentException("Source file does not have a parent directory.");
+        }
+        File outputDirectory = new File(sourceDirectory.getAbsolutePath() + "/bin");
+        outputDirectory.mkdirs();
+        return outputDirectory.getAbsolutePath();
     }
 
 }
