@@ -15,7 +15,7 @@ public class RunnerBuilder {
     IVerifier verifier = new Verifier(); // Default verifier is the strict one
 
 
-    RunnerBuilder(){
+    public RunnerBuilder(){
         super();
     }
 

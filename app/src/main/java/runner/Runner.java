@@ -45,4 +45,9 @@ public class Runner {
                 testCase.getTimeInMs());
         outputFile = new File(compiledFile.getName() + ".out");
     }
+
+    public File getOutputFile() {
+        return outputFile;
+    }
+
 }
