@@ -15,7 +15,6 @@ public class RunnerTest {
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
                 .withSourceFile(getFileFromResources("test.py"))
-                .withTestCase(null)
                 .build();
         assertTrue(runner.verifyProgram());
     }
@@ -26,7 +25,6 @@ public class RunnerTest {
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
                 .withSourceFile(getFileFromResources("test.c"))
-                .withTestCase(null)
                 .build();
         assertTrue(runner.verifyProgram());
     }
@@ -37,7 +35,6 @@ public class RunnerTest {
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
                 .withSourceFile(getFileFromResources("test.cc"))
-                .withTestCase(null)
                 .build();
         assertTrue(runner.verifyProgram());
     }
@@ -48,7 +45,6 @@ public class RunnerTest {
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
                 .withSourceFile(getFileFromResources("test.java"))
-                .withTestCase(null)
                 .build();
         assertTrue(runner.verifyProgram());
     }

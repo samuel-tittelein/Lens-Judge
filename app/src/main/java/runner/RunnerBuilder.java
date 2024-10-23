@@ -1,21 +1,14 @@
 package runner;
 
-import compiler.AbstractCompiler;
-import compiler.ICompiler;
-import executer.ExecuterProxy;
-import executer.IExecuter;
 import problem.TestCase;
-import verifier.IVerifier;
-import verifier.Verifier;
-
 import java.io.File;
-import java.io.IOException;
 
 public class RunnerBuilder {
     File sourceFile;
     File expectedOutputFile;
     File inputFile;
     TestCase testCase;
+
 
     RunnerBuilder(){
         super();
@@ -36,24 +29,8 @@ public class RunnerBuilder {
         return this;
     }
 
-    public RunnerBuilder withTestCase(TestCase testCase){
-        this.testCase = testCase;
-        return this;
-    }
-
-    public File getSourceFile() {
-
-        return sourceFile;
-    }
-
-    public File getExpectedOutputFile() {
-
-        return expectedOutputFile;
-    }
-
-    public File getInputFile() {
-
-        return inputFile;
+    public static RunnerBuilder newInstance(){
+        return new RunnerBuilder();
     }
 
     public TestCase getTestCase() {
@@ -61,11 +38,8 @@ public class RunnerBuilder {
         return testCase;
     }
 
-    public static RunnerBuilder newInstance(){
-        return new RunnerBuilder();
-    }
-
     public Runner build(){
+        testCase = new TestCase(sourceFile, inputFile, expectedOutputFile);
         return new Runner(this);
     }
 
