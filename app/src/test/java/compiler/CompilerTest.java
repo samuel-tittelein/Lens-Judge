@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,6 +13,9 @@ public class CompilerTest {
     public static JavaCompiler javaCompiler;
     public static CCompiler cppCompiler;
 
+    /**
+     * initialise test attributes
+     */
     @BeforeAll
     static void setUp() {
         // Initialize compiler objects for testing
@@ -23,6 +25,9 @@ public class CompilerTest {
         cppCompiler = new CCompiler(CCompilerEnum.CPP);
     }
 
+    /**
+     * assert that a python file has no syntax error (we can execute it)
+     */
     @Test
     void testPythonCompile() {
         File pyfile = new File(getClass().getClassLoader().getResource("test.py").getFile());
@@ -33,6 +38,9 @@ public class CompilerTest {
         assertEquals(exe.getAbsolutePath(), pyfile.getAbsolutePath());
     }
 
+    /**
+     * compile a C file and check if it's well compiled (with right extension and path ...)
+     */
     @Test
     void testCCompile() {
         File cfile = new File(getClass().getClassLoader().getResource("test.c").getFile());
@@ -45,6 +53,10 @@ public class CompilerTest {
         assertEquals(exe.getAbsolutePath(), exe.getAbsolutePath());
     }
 
+    /**
+     * compile a C++ file and check if it's well compiled (with right extension and path ...)
+     */
+    @Test
     void testCppCompile() {
         File cfile = new File(getClass().getClassLoader().getResource("test.cc").getFile());
         String expectedName = "exe";
@@ -56,6 +68,11 @@ public class CompilerTest {
         assertEquals(exe.getAbsolutePath(), exe.getAbsolutePath());
     }
 
+    /**
+     * compile a Java file and check if it's well compiled (with right extension and path ...)
+     * (don't work on the university PC because there is no javac compiler)
+     */
+    //@Test
     void testJavaCompile() {
         File cfile = new File(getClass().getClassLoader().getResource("test.java").getFile());
         String expectedName = "test.java";

@@ -54,9 +54,9 @@ public class AbstractCompiler implements ICompiler {
      */
     @Override
     public String binName(File sourceFile) throws IllegalArgumentException {
-
+        //pardon aux 3eme années qui vont devoir débugger ça !
         String fileName = sourceFile.getAbsolutePath();
-        int dotIndex = fileName.lastIndexOf('.');
+        int dotIndex = fileName.lastIndexOf('.'); // we catch the dot index in order to get the characters behind.
         if (dotIndex == -1) {
             throw new IllegalArgumentException("The source file has no extension");
         }
@@ -83,7 +83,7 @@ public class AbstractCompiler implements ICompiler {
      *
      * @param sourceFile The source file
      *
-     * @return File the compiled binary
+     * @return  the compiled binary File
      */
     @Override
     public File compile(File sourceFile) throws IllegalArgumentException {
@@ -91,6 +91,7 @@ public class AbstractCompiler implements ICompiler {
             throw WRONG_EXTENSION;
         }
         String extension = getExtension(sourceFile);
+        //the attribute compiler take a new compiler according to the extension
         ICompiler compiler = switch (extension) {
             case "java" -> new JavaCompiler();
             case "c" -> new CCompiler(CCompilerEnum.C);
@@ -100,30 +101,4 @@ public class AbstractCompiler implements ICompiler {
         };
         return compiler.compile(sourceFile);
     }
-
-    /**
-     * pardon les 3eme années ToT
-     * @param sourceFile
-     * @return
-     * @throws IllegalArgumentException
-     */
-    public String getOutputDirectory(File sourceFile) throws IllegalArgumentException {
-        File sourceDirectory = sourceFile.getParentFile();
-        if (sourceDirectory == null) {
-            throw new IllegalArgumentException("Source file does not have a parent directory.");
-        }
-        File outputDirectory = new File(sourceDirectory.getAbsolutePath() + "/bin");
-        outputDirectory.mkdirs();
-        return outputDirectory.getAbsolutePath();
-    }
-
-    public String getOutputDirectory(String source) throws IllegalArgumentException {
-        File sourceFile = new File(getClass().getClassLoader().getResource(source).getFile());
-        if (sourceFile == null){
-            throw new IllegalArgumentException("Source file does not exist");
-        }
-        return getOutputDirectory(sourceFile);
-    }
-
-
 }
