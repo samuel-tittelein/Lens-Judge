@@ -3,7 +3,7 @@ package executer;
 import java.io.File;
 import java.io.IOException;
 
-interface IExecuter {
+public interface IExecuter {
 
     /**
      * Put the output of the execution in a file name {filename}.out
