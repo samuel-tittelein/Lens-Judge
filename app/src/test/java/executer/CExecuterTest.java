@@ -8,7 +8,7 @@ import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CExecuterTest {
+class CExecuterTest {
 
     @Test
     void testC() throws IOException, InterruptedException {
