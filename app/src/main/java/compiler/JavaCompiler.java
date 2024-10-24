@@ -28,7 +28,7 @@ public class JavaCompiler extends AbstractCompiler implements ICompiler {
             processController.startProcess(cmd);
             processController.waitForCompletion();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
 
         return new File(binName(sourceFile));
