@@ -7,14 +7,12 @@ import java.util.List;
 public class ProblemBuilder {
 
     private List<TestCase> testCasesList;
-    private int timeLimit;
-    private int memoryLimit;
     private IVerifier verifier;
 
     /**
      * Creates an instance of ProblemBuilder
      */
-    private ProblemBuilder(){
+    public ProblemBuilder(){
         super();
     }
 
@@ -33,40 +31,6 @@ public class ProblemBuilder {
      */
     protected List<TestCase> getTestCasesList(){
         return testCasesList;
-    }
-
-    /**
-     *
-     * @return the instance of ProblemBuilder, with its timeLimit initialized
-     */
-    public ProblemBuilder withTimeLimit(int timeLimit){
-        this.timeLimit = timeLimit;
-        return this;
-    }
-
-    /**
-     *
-     * @return the time limit of the problem's execution in seconds
-     */
-    protected int getTimeLimit(){
-        return timeLimit;
-    }
-
-    /**
-     *
-     * @return the instance of ProblemBuilder, with its memoryLimit initialized
-     */
-    public ProblemBuilder withMemoryLimit(int memoryLimit){
-        this.memoryLimit = memoryLimit;
-        return this;
-    }
-
-    /**
-     *
-     * @return the memory limit of the problem's execution in bytes
-     */
-    protected int getMemoryLimit(){
-        return memoryLimit;
     }
 
     /**
