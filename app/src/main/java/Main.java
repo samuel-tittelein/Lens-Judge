@@ -80,7 +80,7 @@ public class Main {
                 runner.setCompiledFile(compiledFile);
 
                 System.out.println("======== Running : ========");
-                System.out.println(testCase.getInputProgramFile().getName());
+                System.out.println(testCase.getInputProgramFile().getName() + " " +testCase.getOutputFile().getName());
                 long start = System.currentTimeMillis();
                 runner.runFile();
                 long end = System.currentTimeMillis();
@@ -116,7 +116,6 @@ public class Main {
     }
 
     private static File getCompiledFile(File sourceFile) {
-
         System.out.println("======== Compiling : ========");
         System.out.println(sourceFile.getAbsolutePath());
         ICompiler compiler = new AbstractCompiler();
@@ -138,18 +137,20 @@ public class Main {
         }
 
         ProblemBuilder pbb = new ProblemBuilder();
-        pbb.withVerifier(readVerifier());
+        IVerifier verifier = new Verifier();//readVerifier();
+        pbb.withVerifier(verifier);
 
         //------------------- TestCase list creation for problem creation --------------------
         List<TestCase> testCases = new ArrayList<>();
-        long timeLimitEachTestCase = readTimeLimit();
+        long timeLimitEachTestCase = 40;//readTimeLimit();
         for (File file : files) {
             if (file.isFile() && file.getName().endsWith(".in")) {
+
                 File outFile = new File(
                         file.getAbsolutePath().replace(".in", ".ans")
                 );
-                testCases.add(new TestCase(sourceFile, file, outFile, timeLimitEachTestCase, readVerifier()));
-            } else {
+                testCases.add(new TestCase(sourceFile, file, outFile, timeLimitEachTestCase, verifier));//readVerifier()));
+            } else if (file.isFile() && !file.getName().endsWith(".ans")){
                 System.out.println(
                         ANSI_RED + "Warning: Ignoring non-input file: "
                         + file.getName() + ANSI_RESET);
@@ -167,8 +168,8 @@ public class Main {
         Runner runner = builder.withExpectedOutputFile(outFile)
                 .withInputFile(inFile)
                 .withSourceFile(sourceFile)
-                .withTimeInMs(readTimeLimit())
-                .withVerifier(readVerifier())// Time limit in ms, 1000ms = 1s
+                .withTimeInMs(1000)//readTimeLimit())
+                .withVerifier(new Verifier())//readVerifier())// Time limit in ms, 1000ms = 1s
                 .build();
 
         try {
