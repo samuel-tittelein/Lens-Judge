@@ -11,7 +11,6 @@ import java.util.List;
 
 public class PythonExecuter implements IExecuter {
 
-    private IProcess process;
 
     /**
      * Put the output of the execution in a file name {filename}.out
@@ -22,7 +21,7 @@ public class PythonExecuter implements IExecuter {
      */
     @Override
     public void execute(File file, File input, long timeInMs) throws IOException, InterruptedException {
-        process = new TimedProcessController(new ProcessController(), timeInMs);
+        IProcess process = new TimedProcessController(new ProcessController(), timeInMs);
 
         process.startProcess(List.of("python3", file.getAbsolutePath()));
         if (input != null && input.exists()) {

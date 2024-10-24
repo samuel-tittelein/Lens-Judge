@@ -9,7 +9,7 @@ import java.util.List;
 
 public class OrderTolerantVerifier implements IVerifier {
 
-    private IVerifier decoratedVerifier;
+    private final IVerifier decoratedVerifier;
 
     public OrderTolerantVerifier(IVerifier decoratedVerifier){
         this.decoratedVerifier = decoratedVerifier;

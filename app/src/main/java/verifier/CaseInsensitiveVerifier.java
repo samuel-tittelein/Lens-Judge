@@ -7,7 +7,7 @@ import java.nio.file.Path;
 
 public class CaseInsensitiveVerifier implements IVerifier{
 
-    private IVerifier decoratedVerifier;
+    private final IVerifier decoratedVerifier;
 
     public CaseInsensitiveVerifier(IVerifier decoratedVerifier){
         this.decoratedVerifier = decoratedVerifier;
