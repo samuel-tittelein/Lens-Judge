@@ -7,7 +7,7 @@ import java.nio.file.Path;
 
 public class SpaceInsensitiveVerifier implements IVerifier {
 
-    private IVerifier decoratedVerifier;
+    private final IVerifier decoratedVerifier;
 
     public SpaceInsensitiveVerifier(IVerifier decoratedVerifier){
         this.decoratedVerifier = decoratedVerifier;
