@@ -13,14 +13,12 @@ public class PythonExecuter implements IExecuter {
 
     private IProcess process;
 
-
     /**
-     * Executes a Python script and optionally passes an input file.
-     *
-     * @param file  The Python script to execute.
-     * @param input The input file to pass to the Python script (can be null).
-     * @throws IOException
-     * @throws InterruptedException
+     * Put the output of the execution in a file name {filename}.out
+     * @param file A python, java or c file compiled
+     * @param input The input file to pass to the script (can be null).
+     * @throws IOException If an error occurs while writing the output to the file.
+     * @throws InterruptedException If the process is interrupted.
      */
     @Override
     public void execute(File file, File input, long timeInMs) throws IOException, InterruptedException {
