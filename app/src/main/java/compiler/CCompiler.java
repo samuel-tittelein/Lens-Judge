@@ -22,24 +22,15 @@ public class CCompiler extends AbstractCompiler implements ICompiler {
      * Creates a new instance of CCompiler but with different args if it's C or C++
      */
     public CCompiler(CCompilerEnum compiler) {
-        switch (compiler) {
-            case C:
-                args = List.of("gcc", "-x", "c", "-Wall", "-O2", "-pipe", "-lm", "-o");
-                break;
-            case CPP:
-                args = List.of("g++", "-x", "c++", "-Wall", "-O2", "-pipe", "-o");
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported compiler");
-        }
+        args = compiler.getArgs();
         processController = new ProcessController();
     }
 
     /**
      * run the compiler command
      * @param sourceFile The source file
-     * @return
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if the source file is not compatible
+     * @return the compiled file
      */
     @Override
     public File compile(File sourceFile) throws IllegalArgumentException {
