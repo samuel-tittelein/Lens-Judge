@@ -56,46 +56,14 @@ public class Main {
     private static void verifyDirectoryTestCase(File sourceFile,String[] args) {
 
 //---------------------------------- Compilation ----------------------------------------
-        System.out.println("======== Compiling : ========");
-        System.out.println(sourceFile.getAbsolutePath());
-        ICompiler compiler = new AbstractCompiler();
-        File compiledFile = compiler.compile(sourceFile);
+        File compiledFile = getCompiledFile(sourceFile);
 
-//--------------------------------- Problem creation -------------------------------------
-        File testDirectory = new File(args[1]);
-        if (!testDirectory.isDirectory()) {
-            System.out.println(ANSI_RED + "Error: The specified directory does not exist." + ANSI_RESET);
+        //--------------------------------- Problem creation -------------------------------------
+        Problem problem = getTestCases(sourceFile, args);
+        if (problem == null)
             return;
-        }
 
-        File[] files = testDirectory.listFiles();
-        if (files == null) {
-            System.out.println(ANSI_RED + "Error: No test cases found in the specified directory." + ANSI_RESET);
-            return;
-        }
-
-        ProblemBuilder pbb = new ProblemBuilder();
-        pbb.withVerifier(readVerifier());
-
-    //------------------- TestCase list creation for problem creation --------------------
-        List<TestCase> testCases = new ArrayList<>();
-        long timeLimitEachTestCase = readTimeLimit();
-        for (File file : files) {
-            if (file.isFile() && file.getName().endsWith(".in")) {
-                File outFile = new File(
-                        file.getAbsolutePath().replace(".in", ".ans")
-                );
-                testCases.add(new TestCase(sourceFile, file, outFile, timeLimitEachTestCase, readVerifier()));
-            } else {
-                System.out.println(
-                        ANSI_RED + "Warning: Ignoring non-input file: "
-                        + file.getName() + ANSI_RESET);
-            }
-        }
-        pbb.withTestCasesList(testCases);
-        Problem problem = pbb.build();
-
-//------------------------------------- Running ------------------------------------------
+        //------------------------------------- Running ------------------------------------------
         long totalTime = 0;
         boolean success = true;
 
@@ -145,6 +113,50 @@ public class Main {
             System.out.println(ANSI_RED + "Some test cases failed!" + ANSI_RESET);
         }
         System.out.println("======== Total time : " + totalTime + " milliseconds ========");
+    }
+
+    private static File getCompiledFile(File sourceFile) {
+
+        System.out.println("======== Compiling : ========");
+        System.out.println(sourceFile.getAbsolutePath());
+        ICompiler compiler = new AbstractCompiler();
+        return compiler.compile(sourceFile);
+    }
+
+    private static Problem getTestCases(File sourceFile, String[] args) {
+
+        File testDirectory = new File(args[1]);
+        if (!testDirectory.isDirectory()) {
+            System.out.println(ANSI_RED + "Error: The specified directory does not exist." + ANSI_RESET);
+            return null;
+        }
+
+        File[] files = testDirectory.listFiles();
+        if (files == null) {
+            System.out.println(ANSI_RED + "Error: No test cases found in the specified directory." + ANSI_RESET);
+            return null;
+        }
+
+        ProblemBuilder pbb = new ProblemBuilder();
+        pbb.withVerifier(readVerifier());
+
+        //------------------- TestCase list creation for problem creation --------------------
+        List<TestCase> testCases = new ArrayList<>();
+        long timeLimitEachTestCase = readTimeLimit();
+        for (File file : files) {
+            if (file.isFile() && file.getName().endsWith(".in")) {
+                File outFile = new File(
+                        file.getAbsolutePath().replace(".in", ".ans")
+                );
+                testCases.add(new TestCase(sourceFile, file, outFile, timeLimitEachTestCase, readVerifier()));
+            } else {
+                System.out.println(
+                        ANSI_RED + "Warning: Ignoring non-input file: "
+                        + file.getName() + ANSI_RESET);
+            }
+        }
+        pbb.withTestCasesList(testCases);
+        return pbb.build();
     }
 
     public static void verifyOneTestCase(File sourceFile, String [] args) {
