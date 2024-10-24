@@ -6,7 +6,6 @@ import executer.ExecuterProxy;
 import executer.IExecuter;
 import problem.TestCase;
 import verifier.IVerifier;
-import verifier.Verifier;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,9 +26,13 @@ public class Runner {
     }
 
     public boolean verifyProgram() throws IOException, InterruptedException {
-        compileFile();
-        runFile();
-        IVerifier verifier = new Verifier();
+        if (compiledFile == null) {
+            compileFile();
+        }
+        if (outputFile == null) {
+            runFile();
+        }
+        IVerifier verifier = testCase.getVerifier();
         return verifier.verify(testCase.getOutputFile(), outputFile);
     }
 
@@ -40,6 +43,9 @@ public class Runner {
     }
 
     public void runFile() throws IOException, InterruptedException {
+        if (compiledFile == null) {
+            compileFile();
+        }
         IExecuter executer = new ExecuterProxy();
         executer.execute(compiledFile, testCase.getInputFile(),
                 testCase.getTimeInMs());
@@ -48,6 +54,10 @@ public class Runner {
 
     public File getOutputFile() {
         return outputFile;
+    }
+
+    public void setCompiledFile(File compiledFile) {
+        this.compiledFile = compiledFile;
     }
 
 }
