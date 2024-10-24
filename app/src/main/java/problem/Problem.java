@@ -10,8 +10,6 @@ import verifier.IVerifier;
 public class Problem implements Iterable<TestCase>{
 
     private final List<TestCase> testCasesList;
-    private final int timeLimit;
-    private final int memoryLimit;
     private final IVerifier verifier;
 
     /**
@@ -19,8 +17,6 @@ public class Problem implements Iterable<TestCase>{
      */
     public Problem(ProblemBuilder b){
         this.testCasesList = b.getTestCasesList();
-        this.timeLimit = b.getTimeLimit();
-        this.memoryLimit = b.getMemoryLimit();
         this.verifier = b.getVerifier();
     }
 
@@ -30,22 +26,6 @@ public class Problem implements Iterable<TestCase>{
      */
     public List<TestCase> getTestCasesList() {
         return testCasesList;
-    }
-
-    /**
-     *
-     * @return the time limit of the problem's execution in seconds
-     */
-    public int getTimeLimit() {
-        return timeLimit;
-    }
-
-    /**
-     *
-     * @return the memory limit of the problem in bytes
-     */
-    public int getMemoryLimit() {
-        return memoryLimit;
     }
 
     /**
