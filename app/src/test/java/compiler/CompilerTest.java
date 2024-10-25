@@ -21,7 +21,6 @@ public class CompilerTest {
         // Initialize compiler objects for testing
         cCompiler = new CCompiler(CCompilerEnum.C);
         pythonCompiler = new PythonCompiler();
-        //javaCompiler = new JavaCompiler();
         cppCompiler = new CCompiler(CCompilerEnum.CPP);
     }
 

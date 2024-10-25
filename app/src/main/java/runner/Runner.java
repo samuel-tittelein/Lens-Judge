@@ -25,6 +25,12 @@ public class Runner {
         return testCase;
     }
 
+    /**
+     *
+     * @return a boolean that indicates if the output file is correct
+     * @throws IOException if an error occurs while writing the output to the file.
+     * @throws InterruptedException if the process is interrupted.
+     */
     public boolean verifyProgram() throws IOException, InterruptedException {
         if (compiledFile == null) {
             compileFile();
@@ -42,12 +48,20 @@ public class Runner {
 
     }
 
+    /**
+     * Compile the file
+     */
     public void compileFile(){
 
         ICompiler compiler = new AbstractCompiler();
         compiledFile = compiler.compile(testCase.getInputProgramFile());
     }
 
+    /**
+     * Run the file
+     * @throws IOException if an error occurs while writing the output to the file.
+     * @throws InterruptedException if the process is interrupted.
+     */
     public void runFile() throws IOException, InterruptedException {
         if (compiledFile == null) {
             compileFile();

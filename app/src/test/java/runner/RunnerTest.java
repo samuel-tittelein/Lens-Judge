@@ -9,7 +9,7 @@ import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class RunnerTest {
+class RunnerTest {
     @Test
     void testRunnerPython() throws IOException, InterruptedException {
         RunnerBuilder builder = new RunnerBuilder();

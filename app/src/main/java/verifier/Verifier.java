@@ -20,7 +20,8 @@ public class Verifier implements IVerifier {
                     return false;
                 }
             }
-            return actualReader.readLine() == null;
+            String forSonarLint = actualReader.readLine(); //SonarLint doesn't like returning it directly so I have to do that ¯\_(ツ)_/¯
+            return forSonarLint == null;
         }
         catch (IOException e) {
             throw new RuntimeException("Error reading file: " + e.getMessage(), e);

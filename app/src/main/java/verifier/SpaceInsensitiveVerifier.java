@@ -7,7 +7,7 @@ import java.nio.file.Path;
 
 public class SpaceInsensitiveVerifier implements IVerifier {
 
-    private IVerifier decoratedVerifier;
+    private final IVerifier decoratedVerifier;
 
     public SpaceInsensitiveVerifier(IVerifier decoratedVerifier){
         this.decoratedVerifier = decoratedVerifier;
@@ -22,8 +22,17 @@ public class SpaceInsensitiveVerifier implements IVerifier {
             return decoratedVerifier.verify(spaceRemovedExpectedFile, spaceRemovedActualFile);
         } finally {
             //Need to put a finally to delete the temporary files, Yeah it's weird
-            spaceRemovedExpectedFile.delete();
-            spaceRemovedActualFile.delete();
+            try {
+                Files.delete(spaceRemovedExpectedFile.toPath());
+            } catch (IOException e) {
+                System.err.println("Failed to delete spaceRemovedExpectedFile: " + e.getMessage());
+            }
+
+            try {
+                Files.delete(spaceRemovedActualFile.toPath());
+            } catch (IOException e) {
+                System.err.println("Failed to delete spaceRemovedActualFile: " + e.getMessage());
+            }
         }
     }
 
