@@ -6,6 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class PrecisionVerifier implements IVerifier {
+
+    /**
+     * Solution heavily inspired by copilot since the last implementation didn't work
+     */
     private final double tolerance;
 
     public PrecisionVerifier(double tolerance) {
@@ -24,26 +28,46 @@ public class PrecisionVerifier implements IVerifier {
                 actualLine = actualReader.readLine();
 
                 if (actualLine == null) {
-                    return false;  // Sorties différentes
+                    return false;  // Different outputs, actual file is shorter
                 }
 
-                // Convertir les lignes en nombres réels et comparer leur différence
-                try {
-                    double expectedValue = Double.parseDouble(expectedLine.trim());
-                    double actualValue = Double.parseDouble(actualLine.trim());
+                // Each token is a string separated by space
+                String[] expectedTokens = expectedLine.trim().split("\\s+");
+                String[] actualTokens = actualLine.trim().split("\\s+");
 
-                    if (Math.abs(expectedValue - actualValue) > tolerance) {
-                        return false;  // Différence supérieure à la tolérance
-                    }
-
-                } catch (NumberFormatException ignored){
-                    //Nothing to see here ¯\_(ツ)_/¯
+                if (expectedTokens.length != actualTokens.length) {
+                    return false;  // Different number of elements in lines
                 }
 
-
+                for (int i = 0; i < expectedTokens.length; i++) {
+                    if (extracted(expectedTokens, i, actualTokens))
+                        return false;  // Difference exceeds tolerance
+                }
             }
-            String forSonarLint = actualReader.readLine(); //SonarLint doesn't like returning it directly so I have to do that ¯\_(ツ)_/¯
-            return forSonarLint == null;  // Vérifier si le fichier produit est plus long
+
+            String forSonarLint = actualReader.readLine();
+            return forSonarLint == null;
         }
     }
+
+    private boolean extracted(String[] expectedTokens, int i,
+            String[] actualTokens) {
+
+        try {
+            double expectedValue = Double.parseDouble(expectedTokens[i]);
+            double actualValue = Double.parseDouble(actualTokens[i]);
+
+            if (Math.abs(expectedValue - actualValue) > tolerance) {
+                return true;
+            }
+
+        } catch (NumberFormatException ignored) {
+            // Handle non-numeric tokens by direct comparison
+            if (!expectedTokens[i].equals(actualTokens[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
