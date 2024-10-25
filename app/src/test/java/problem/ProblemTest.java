@@ -28,8 +28,6 @@ class ProblemTest {
 
         ProblemBuilder builder = ProblemBuilder.newInstance()
                 .withTestCasesList(testCasesList)
-                .withTimeLimit(5)
-                .withMemoryLimit(12)
                 .withVerifier(verifier);
 
         problem = builder.build();
@@ -48,18 +46,6 @@ class ProblemTest {
     @Test
     void getTestCasesListValueTest(){
         assertEquals(problem.getTestCasesList(), testCasesList);
-    }
-
-    @Test
-    void getTimeLimitTest(){
-        assertEquals(5, problem.getTimeLimit());
-        assertNotEquals(150, problem.getTimeLimit());
-    }
-
-    @Test
-    void getMemoryLimitTest(){
-        assertEquals(12, problem.getMemoryLimit());
-        assertNotEquals(150, problem.getMemoryLimit());
     }
 
     @Test

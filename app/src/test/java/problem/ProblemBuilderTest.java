@@ -51,34 +51,6 @@ class ProblemBuilderTest {
     }
 
     @Test
-    void withTimeLimitTest(){
-        int timeLimit = 5;
-        builder.withTimeLimit(timeLimit);
-        assertEquals(timeLimit, builder.getTimeLimit());
-    }
-
-    @Test
-    void getTimeLimitClassTest(){
-        int timeLimit = 12;
-        builder.withTimeLimit(timeLimit);
-        assertEquals(timeLimit, builder.getTimeLimit());
-    }
-
-    @Test
-    void withMemoryLimitTest(){
-        int memoryLimit = 120;
-        builder.withMemoryLimit(memoryLimit);
-        assertEquals(memoryLimit, builder.getMemoryLimit());
-    }
-
-    @Test
-    void getMemoryLimitValueTest(){
-        int memoryLimit = 150;
-        builder.withMemoryLimit(memoryLimit);
-        assertEquals(memoryLimit, builder.getMemoryLimit());
-    }
-
-    @Test
     void withVerifierTest(){
         verifier = mock(IVerifier.class);
         builder.withVerifier(verifier);

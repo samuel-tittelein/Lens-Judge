@@ -1,5 +1,7 @@
 package verifier;
 
+import exception.RuntimeErrorException;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,6 +22,8 @@ public class SpaceInsensitiveVerifier implements IVerifier {
 
         try {
             return decoratedVerifier.verify(spaceRemovedExpectedFile, spaceRemovedActualFile);
+        } catch (RuntimeErrorException e) {
+            throw new RuntimeException(e);
         } finally {
             //Need to put a finally to delete the temporary files, Yeah it's weird
             try {
