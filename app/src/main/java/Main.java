@@ -99,7 +99,8 @@ public class Main {
                     System.out.println(ANSI_RED + "Test failed" + ANSI_RESET);
                 }
             } catch (Exception e) {
-                System.out.println("Error running test case: " + e.getMessage());
+                System.out.println(ANSI_RED + "Error running test case: " + e.getMessage() + ANSI_RESET);
+                success = false;
             }
         }
 
