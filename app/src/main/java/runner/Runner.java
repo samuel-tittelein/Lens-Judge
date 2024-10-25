@@ -40,12 +40,7 @@ public class Runner {
             runFile();
         }
         IVerifier verifier = testCase.getVerifier();
-        try {
-            return verifier.verify(testCase.getOutputFile(), outputFile);
-        } finally {
-            outputFile.delete();
-        }
-
+        return verifier.verify(testCase.getOutputFile(), outputFile);
     }
 
     /**
@@ -79,5 +74,5 @@ public class Runner {
     public void setCompiledFile(File compiledFile) {
         this.compiledFile = compiledFile;
     }
-}
 
+}
