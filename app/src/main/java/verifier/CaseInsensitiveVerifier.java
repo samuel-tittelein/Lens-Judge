@@ -23,6 +23,8 @@ public class CaseInsensitiveVerifier implements IVerifier{
 
         try {
             return decoratedVerifier.verify(lowerCaseExpectedFile, lowerCaseActualFile);
+        } catch (RuntimeErrorException e) {
+            throw new RuntimeException(e);
         } finally {
             //Need to put a finally to delete the temporary files, Yeah it's weird
             // Deleting files using NIO Files.delete for better error handling
