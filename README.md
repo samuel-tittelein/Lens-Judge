@@ -1,42 +1,48 @@
 # Lens Judge
 
+## Table of contents
 
-## Membres du groupe
+1. [Group members](#group-members)
+2. [Functionalities recap](#functionalities-recap)
+3. [UML Diagram](#uml-diagram)
+4. [Use case](#use-case)
+
+## Group members
 
 - Fierquin Mattéo --> Chef de projet 
 - Tittelein Samuel --> Scrum Master
 - Mortreux Théo
 - Lechêne Romain
 
-## Tableau récapitulatif des fonctionnalités
+## Functionalities recap
 
-| Fonctionnalité                                  | Patron de conception |
-| :--------------                                 | --------------------:|
-| Représentation d'un cas de test                 | /                    |
-| Représentation d'un problème                    | /                    |
-| Configuration d'un problème                     | Fabrique             |
-| Représentation d'un processus                   | /                    |
-| Limitation du temps d'exécution d'un processus  | Décorateur           |
-| Limitaion de la mémoire d'un processus          | Décorateur           |
-| Compilation d'un programme C                    | Stratégie & Proxy    |
-| Compilation d'un programme C++                  | Stratégie & Proxy    |
-| Compilation d'un programme Java                 | Stratégie & Proxy    |
-| Compilation d'un programme Python               | Stratégie & Proxy    |
-| Exécution d'un programme Python                 | Stratégie            |
-| Exécution d'un programme C compilé              | Stratégie            |
-| Exécution d'un programme C++ compilé            | Stratégie            |
-| Exécution d'un programme Java compilé           | Stratégie            |
-| Vérification stricte de la solution             | Stratégie            |
-| Vérification avec tolérance sur les réels       | Stratégie            |
-| Vérification avec tolérance sur la casse        | Stratégie            |
-| Vérification avec tolérance sur les espaces     | Stratégie            |
-| Vérification avec tolérance sur l'ordre         | Stratégie            |
-| Vérification d'une solution parmi plusieurs     | /                    |
-| Vérification déléguée à un programme externe    | Adaptateur           |
-| Configuration de l'exécution sur un cas de test | /                    |
-| Programme principal du juge automatique         | /                    |
+| Functionality                                   | Design pattern       |            Author|
+| :--------------                                 | --------------------:| ----------------:|
+| Représentation d'un cas de test                 | /                    | Théo Mortreux    |
+| Représentation d'un problème                    | Builder              | Romain Lechêne   |
+| Configuration d'un problème                     | Fabrique             | Romain Lechêne   |
+| Représentation d'un processus                   | Adaptateur           | Mattéo Fierquin  |
+| Limitation du temps d'exécution d'un processus  | Décorateur           | Mattéo Fierquin  |
+| Limitaion de la mémoire d'un processus          | Décorateur           | /                |
+| Compilation d'un programme C                    | Stratégie & Proxy    | Samuel Tittelein |
+| Compilation d'un programme C++                  | Stratégie & Proxy    | Samuel Tittelein |
+| Compilation d'un programme Java                 | Stratégie & Proxy    | Samuel Tittelein |
+| Compilation d'un programme Python               | Stratégie & Proxy    | Samuel Tittelein |
+| Exécution d'un programme Python                 | Stratégie            | Mattéo Fierquin  |
+| Exécution d'un programme C compilé              | Stratégie            | Mattéo Fierquin  |
+| Exécution d'un programme C++ compilé            | Stratégie            | Mattéo Fierquin  |
+| Exécution d'un programme Java compilé           | Stratégie            | Mattéo Fierquin  |
+| Vérification stricte de la solution             | Stratégie            | Théo Mortreux    |
+| Vérification avec tolérance sur les réels       | Stratégie            | Théo Mortreux    |
+| Vérification avec tolérance sur la casse        | Stratégie            | Mattéo Fierquin  |
+| Vérification avec tolérance sur les espaces     | Stratégie            | Mattéo Fierquin  |
+| Vérification avec tolérance sur l'ordre         | Stratégie            | Mattéo & Théo    |
+| Vérification d'une solution parmi plusieurs     | /                    | /                |
+| Vérification déléguée à un programme externe    | Adaptateur           | /                |
+| Configuration de l'exécution sur un cas de test | /                    | Mattéo & Romain  |
+| Programme principal du juge automatique         | /                    | Samuel & Romain  |
 
-## Diagramme de classes
+## UML Diagram
 
 ```plantuml
 
@@ -252,3 +258,17 @@ CCompilerEnum --^ CCompiler
 TestCase --> Problem
 InputReader --> Main : <<utilise>>
 ```
+
+## Use case
+
+In order to create the .jar file, cd to the project root, and type ```gradle clean build``` into the console. The .jar file created will be located in the *app/builds/libs* directory.
+
+The expected output should be in a *.ans* file, while the inputs should be in a *.in* file.
+
+### Unique test case
+
+If you want to test one specific case, you can launch the .jar file by typing ```java -jar app.jar relative/path/to/file_to_test path/to/parameters/file path/to/expected/output/file``` in the console.
+
+### Directory of test cases
+
+If you want to test multiple cases using a directory, you can launch the .jar file by typing ```java -jar app.jar relative/path/to/file_to_test path/to/ins&outs/file``` in the console.
