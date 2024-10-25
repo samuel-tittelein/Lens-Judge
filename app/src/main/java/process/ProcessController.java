@@ -40,19 +40,25 @@ public class ProcessController implements IProcess {
     }
 
     // Method to provide input to the running process
-    // Copy Pasted from StackOverflow, can't really understand how it works yet
     public void provideInput(InputStream input) throws IOException {
+        // Check if the process is initialized and its output stream is available
         if (process != null && process.getOutputStream() != null) {
+            // Use try-with-resources to create a BufferedOutputStream that will auto-close after use
             try (BufferedOutputStream out = new BufferedOutputStream(process.getOutputStream())) {
+                // Create a buffer to read chunks of data from the input stream
                 byte[] buffer = new byte[1024];
                 int bytesRead;
+                // Loop to read data from the input stream into the buffer
                 while ((bytesRead = input.read(buffer)) != -1) {
+                    // Write the number of bytes read to the process's output stream
                     out.write(buffer, 0, bytesRead);
                 }
-                out.flush(); // Ensure all data is sent to the process
-            }
+                // Flush the output stream to ensure all data is sent to the process
+                out.flush();
+            } // BufferedOutputStream 'out' is automatically closed here
         }
     }
+
 
     private void captureOutput() throws IOException {
         // Capture standard output
