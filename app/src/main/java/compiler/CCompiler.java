@@ -3,6 +3,7 @@ package compiler;
 import process.ProcessController;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,9 @@ public class CCompiler extends AbstractCompiler implements ICompiler {
         try {
             processController.startProcess(cmd);
             processController.waitForCompletion();
-        }catch (Exception e) {
+        }catch (IOException e) {
+            System.err.println(e.getMessage());
+        }catch (InterruptedException e){
             System.err.println(e.getMessage());
         }
 

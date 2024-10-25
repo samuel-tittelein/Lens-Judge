@@ -196,18 +196,28 @@ public class Main {
 
     private static IVerifier readVerifier() {
         System.out.println(
-                "1. Strict verification\n2. Space insensitive verification\n3. Order tolerant verification\n4. Precision tolerant verification\n5. Case sensitive verification"
+                "1. Strict verification\n" +
+                "2. Space insensitive verification\n" +
+                "3. Order tolerant verification\n" +
+                "4. Precision tolerant verification\n" +
+                "5. Case sensitive verification"
         );
-        System.out.print("Enter the verification mode (default : 1. Strict) : ");
+        System.out.print("Enter the verification mode (default: 1. Strict) : ");
+
         IVerifier verifier = DEFAULT_VERIFIER;
-        int verifierIndex;
+        int verifierIndex = 1;  // Default to Strict verification
+
+        // Input validation
         do {
             verifierIndex = readInt();
-        } while (0 > verifierIndex || verifierIndex > 5);
+            if (verifierIndex < 1 || verifierIndex > 5) {
+                System.out.println("Invalid input. Please select a number between 1 and 5.");
+            }
+        } while (verifierIndex < 1 || verifierIndex > 5);
 
-
+        // Switch to the selected verification mode
         switch (verifierIndex) {
-            case 0, 1:
+            case 1: // Strict verification (default, so no changes needed)
                 break;
             case 2:
                 verifier = new SpaceInsensitiveVerifier(verifier);
@@ -223,9 +233,12 @@ public class Main {
                 break;
             default:
                 System.out.println(ANSI_RED + "Invalid verification mode. Using default strict verification." + ANSI_RESET);
+                break;
         }
+
         return verifier;
     }
+
 
     private static double readPrecision() {
         double precision = DEFAULT_PRECISION;
