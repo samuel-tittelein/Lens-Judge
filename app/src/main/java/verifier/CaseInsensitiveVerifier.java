@@ -22,8 +22,18 @@ public class CaseInsensitiveVerifier implements IVerifier{
             return decoratedVerifier.verify(lowerCaseExpectedFile, lowerCaseActualFile);
         } finally {
             //Need to put a finally to delete the temporary files, Yeah it's weird
-            lowerCaseExpectedFile.delete();
-            lowerCaseActualFile.delete();
+            // Deleting files using NIO Files.delete for better error handling
+            try {
+                Files.delete(lowerCaseExpectedFile.toPath());
+            } catch (IOException e) {
+                System.err.println("Failed to delete lowerCaseExpectedFile: " + e.getMessage());
+            }
+
+            try {
+                Files.delete(lowerCaseActualFile.toPath());
+            } catch (IOException e) {
+                System.err.println("Failed to delete lowerCaseActualFile: " + e.getMessage());
+            }
         }
     }
 

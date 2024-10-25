@@ -18,8 +18,7 @@ public class ExecuterProxy implements IExecuter {
     public void execute(File file, File input, long timeInMs) throws IOException, InterruptedException {
         IExecuter executer;
         if (file == null){
-            RuntimeException e = new RuntimeException("The file is null.");
-            throw e;
+            throw new RuntimeException("The file is null.");
         }
         try{
         String extension = AbstractCompiler.getExtension(file);

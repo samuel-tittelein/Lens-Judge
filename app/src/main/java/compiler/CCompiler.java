@@ -45,9 +45,11 @@ public class CCompiler extends AbstractCompiler implements ICompiler {
         try {
             processController.startProcess(cmd);
             processController.waitForCompletion();
-        }catch (IOException e) {
+        } catch (InterruptedException e) {
+            // Restore the interrupt status to ensure it can be handled further up the stack if needed
+            Thread.currentThread().interrupt();
             System.err.println(e.getMessage());
-        }catch (InterruptedException e){
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
 

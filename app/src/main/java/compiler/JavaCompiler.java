@@ -15,7 +15,7 @@ public class JavaCompiler extends AbstractCompiler implements ICompiler {
      * compile the given file with the command : "javac -c [sourceDirectory] [sourceFileName]"
      * @param sourceFile The source file
      * @return the compiled file
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if the source file is not compatible
      */
     @Override
     public File compile(File sourceFile) throws IllegalArgumentException {
