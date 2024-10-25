@@ -61,7 +61,7 @@ public class Main {
 
         //------------------------------------- Running ------------------------------------------
         long totalTime = 0;
-        boolean success = true;
+        int success = 0;
 
         for (TestCase testCase : problem) {
             try {
@@ -90,7 +90,7 @@ public class Main {
     //-------------------------------- Verifying ----------------------------------------
                 System.out.println("======== Verifying ========");
                 boolean result = runner.verifyProgram();
-                success = result && success;
+                success += result ? 1 : 0;
                 if (result) {
                     System.out.println(
                             ANSI_GREEN + "Test passed in " + (end - start)
@@ -100,14 +100,14 @@ public class Main {
                 }
             } catch (Exception e) {
                 System.out.println(ANSI_RED + "Error running test case: " + e.getMessage() + ANSI_RESET);
-                success = false;
             }
         }
 
-        if (success) {
+        if (success == problem.getTestCasesList().size()) {
             System.out.println(ANSI_GREEN + "All test cases passed!" + ANSI_RESET);
         } else {
             System.out.println(ANSI_RED + "Some test cases failed!" + ANSI_RESET);
+            System.out.println(ANSI_RED + "Passed: " + success + "/" + problem.getTestCasesList().size() + ANSI_RESET);
         }
         System.out.println("======== Total time : " + totalTime + " milliseconds ========");
     }
