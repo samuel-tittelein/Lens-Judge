@@ -3,6 +3,7 @@ package compiler;
 import process.ProcessController;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -25,8 +26,12 @@ public class PythonCompiler extends AbstractCompiler implements ICompiler{
                     List.of("python3", "-m", "py_compile", sourceFile.getAbsolutePath())
             );
             processController.waitForCompletion();
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Python file syntax error");
+        } catch (InterruptedException e) {
+            // Restore the interrupt status to ensure it can be handled further up the stack if needed
+            Thread.currentThread().interrupt();
+            System.err.println("Thread was interrupted: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("IOException occurred: " + e.getMessage());
         }
         return sourceFile;
     }

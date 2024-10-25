@@ -8,7 +8,7 @@ import java.net.URL;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class PythonExecuterTest {
+class PythonExecuterTest {
 
     @Test
     void testPython() throws IOException, InterruptedException {

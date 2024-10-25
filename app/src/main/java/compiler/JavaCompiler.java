@@ -3,6 +3,7 @@ package compiler;
 import process.ProcessController;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -27,8 +28,12 @@ public class JavaCompiler extends AbstractCompiler implements ICompiler {
         try {
             processController.startProcess(cmd);
             processController.waitForCompletion();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
+        } catch (InterruptedException e) {
+            // Restore the interrupt status to ensure it can be handled further up the stack if needed
+            Thread.currentThread().interrupt();
+            System.err.println("Thread was interrupted: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("IOException occurred: " + e.getMessage());
         }
 
         return new File(binName(sourceFile));
