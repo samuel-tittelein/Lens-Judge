@@ -3,8 +3,8 @@
 
 ## Membres du groupe
 
-- Fierquin Mattéo
-- Tittelein Samuel
+- Fierquin Mattéo --> Chef de projet 
+- Tittelein Samuel --> Scrum Master
 - Mortreux Théo
 - Lechêne Romain
 
