@@ -45,6 +45,7 @@ class RunnerTest {
     }
 
     //@Test
+    //This test doesn't work on our computers because the javac command doesn't exist
     void testRunnerJava() throws IOException, InterruptedException, RuntimeErrorException {
         RunnerBuilder builder = new RunnerBuilder();
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))

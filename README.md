@@ -181,7 +181,7 @@ CasseInsensitiveVerifier ..|> IVerifier
 class ProblemBuilder {
 -timeLimit : long
 -memoryLimit : long
--testcases : Array<TestCase>
+-testcases : Array<problem.TestCase>
 -verifieMod : IVerifier
 -output : String
 --
@@ -192,8 +192,8 @@ class ProblemBuilder {
 # getLimitTime(): long
 + withLimitMemory(long): ProblemBuilder
 # getLimitMemory(): long
-+ withTestCases(Array<TestCase>): ProblemBuilder
-# getTestCases() : Array<TestCase>
++ withTestCases(Array<problem.TestCase>): ProblemBuilder
+# getTestCases() : Array<problem.TestCase>
 + withVerifier(IVerifier): ProblemBuilder
 # getVerifier() : IVerifier
 + withOutput(String): ProblemBuilder
@@ -204,7 +204,7 @@ class ProblemBuilder {
 class Problem {
 -timeLimit : long
 -memoryLimit : long
--testcases : Array<TestCase>
+-testcases : Array<problem.TestCase>
 -verifieMod : IVerifier
 -output : String
 --
@@ -215,17 +215,17 @@ class Problem {
 ProblemBuilder --> Problem : <<construit>>
 
 
-class TestCase{
+class problem.TestCase{
 -input : String
 -output : String
 --
-TestCase()
+problem.TestCase()
 setInput(String) : void
 setOutput(String) : void
 }
 
 
-Problem *-- TestCase
+Problem *-- problem.TestCase
 
 
 Problem --> IVerifier : <<utilise>>
