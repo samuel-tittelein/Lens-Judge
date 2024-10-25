@@ -6,8 +6,6 @@ import java.io.IOException;
 import compiler.AbstractCompiler;
 
 public class ExecuterProxy implements IExecuter {
-    private IExecuter executer;
-
 
     /**
      * Put the output of the execution in a file name {filename}.out
@@ -18,8 +16,10 @@ public class ExecuterProxy implements IExecuter {
      */
     @Override
     public void execute(File file, File input, long timeInMs) throws IOException, InterruptedException {
-        if (file == null)
+        IExecuter executer;
+        if (file == null){
             throw new RuntimeException("The file is null.");
+        }
         try{
         String extension = AbstractCompiler.getExtension(file);
         switch (extension) {

@@ -8,7 +8,7 @@ import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class JavaExecuterTest {
+class JavaExecuterTest {
 
     @Test
     void testJava() throws IOException, InterruptedException {

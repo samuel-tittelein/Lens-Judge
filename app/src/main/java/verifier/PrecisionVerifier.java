@@ -42,8 +42,8 @@ public class PrecisionVerifier implements IVerifier {
 
 
             }
-
-            return actualReader.readLine() == null;  // Vérifier si le fichier produit est plus long
+            String forSonarLint = actualReader.readLine(); //SonarLint doesn't like returning it directly so I have to do that ¯\_(ツ)_/¯
+            return forSonarLint == null;  // Vérifier si le fichier produit est plus long
         }
     }
 }

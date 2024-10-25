@@ -3,7 +3,6 @@ package problem;
 import verifier.IVerifier;
 
 import java.io.File;
-import java.util.Iterator;
 
 public class TestCase {
 

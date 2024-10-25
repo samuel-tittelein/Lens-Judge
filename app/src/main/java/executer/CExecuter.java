@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class CExecuter implements IExecuter {
-    private IProcess process;
-
 
     /**
      * Put the output of the execution in a file name {filename}.out
@@ -22,7 +20,7 @@ public class CExecuter implements IExecuter {
      */
     @Override
     public void execute(File file, File input, long timeInMs) throws IOException, InterruptedException {
-        process = new TimedProcessController(new ProcessController(), timeInMs);
+        IProcess process = new TimedProcessController(new ProcessController(), timeInMs);
 
         process.startProcess(List.of(file.getAbsolutePath()));
         if (input != null && input.exists()) {

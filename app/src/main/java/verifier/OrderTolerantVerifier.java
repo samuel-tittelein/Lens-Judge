@@ -9,7 +9,7 @@ import java.util.List;
 
 public class OrderTolerantVerifier implements IVerifier {
 
-    private IVerifier decoratedVerifier;
+    private final IVerifier decoratedVerifier;
 
     public OrderTolerantVerifier(IVerifier decoratedVerifier){
         this.decoratedVerifier = decoratedVerifier;
@@ -25,8 +25,17 @@ public class OrderTolerantVerifier implements IVerifier {
             return decoratedVerifier.verify(sortedExpectedFile, sortedActualFile);
         } finally {
             //Need to put a finally to delete the temporary files, Yeah it's weird
-            sortedExpectedFile.delete();
-            sortedActualFile.delete();
+            try {
+                Files.delete(sortedExpectedFile.toPath());
+            } catch (IOException e) {
+                System.err.println("Failed to delete sortedExpectedFile: " + e.getMessage());
+            }
+
+            try {
+                Files.delete(sortedActualFile.toPath());
+            } catch (IOException e) {
+                System.err.println("Failed to delete sortedActualFile: " + e.getMessage());
+            }
         }
     }
 
