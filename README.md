@@ -39,9 +39,6 @@
 ## Diagramme de classes
 
 ```plantuml
-!theme plain
-top to bottom direction
-skinparam linetype ortho
 
 class AbstractCompiler {
   + AbstractCompiler(): 
