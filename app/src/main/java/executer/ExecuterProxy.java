@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import compiler.AbstractCompiler;
+import exception.RuntimeErrorException;
 
 public class ExecuterProxy implements IExecuter {
 
@@ -15,10 +16,10 @@ public class ExecuterProxy implements IExecuter {
      * @throws InterruptedException If the process is interrupted.
      */
     @Override
-    public void execute(File file, File input, long timeInMs) throws IOException, InterruptedException {
+    public void execute(File file, File input, long timeInMs) throws IOException, InterruptedException, RuntimeErrorException {
         IExecuter executer;
         if (file == null){
-            throw new RuntimeException("The file is null.");
+            throw new RuntimeErrorException("The file is null.");
         }
         try{
         String extension = AbstractCompiler.getExtension(file);

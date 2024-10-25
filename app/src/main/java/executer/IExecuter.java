@@ -1,5 +1,7 @@
 package executer;
 
+import exception.RuntimeErrorException;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -12,5 +14,5 @@ public interface IExecuter {
      * @throws IOException If an error occurs while writing the output to the file.
      * @throws InterruptedException If the process is interrupted.
      */
-    void execute(File file, File input, long timeInMs) throws IOException, InterruptedException;
+    void execute(File file, File input, long timeInMs) throws IOException, InterruptedException, RuntimeErrorException;
 }

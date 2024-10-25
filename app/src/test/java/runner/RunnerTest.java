@@ -1,5 +1,6 @@
 package runner;
 
+import exception.RuntimeErrorException;
 import org.junit.jupiter.api.Test;
 import verifier.Verifier;
 
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RunnerTest {
     @Test
-    void testRunnerPython() throws IOException, InterruptedException {
+    void testRunnerPython() throws IOException, InterruptedException, RuntimeErrorException {
         RunnerBuilder builder = new RunnerBuilder();
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
@@ -22,7 +23,7 @@ class RunnerTest {
     }
 
     @Test
-    void testRunnerC() throws IOException, InterruptedException {
+    void testRunnerC() throws IOException, InterruptedException, RuntimeErrorException {
         RunnerBuilder builder = new RunnerBuilder();
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
@@ -33,7 +34,7 @@ class RunnerTest {
     }
 
     @Test
-    void testRunnerCPP() throws IOException, InterruptedException {
+    void testRunnerCPP() throws IOException, InterruptedException, RuntimeErrorException {
         RunnerBuilder builder = new RunnerBuilder();
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))
@@ -44,7 +45,7 @@ class RunnerTest {
     }
 
     //@Test
-    void testRunnerJava() throws IOException, InterruptedException {
+    void testRunnerJava() throws IOException, InterruptedException, RuntimeErrorException {
         RunnerBuilder builder = new RunnerBuilder();
         Runner runner = builder.withExpectedOutputFile(getFileFromResources("test.ans"))
                 .withInputFile(getFileFromResources("test.in"))

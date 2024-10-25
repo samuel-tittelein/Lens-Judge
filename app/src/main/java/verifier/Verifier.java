@@ -1,12 +1,14 @@
 package verifier;
 
+import exception.RuntimeErrorException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class Verifier implements IVerifier {
-    public boolean verify(File expectedFile, File actualFile) {
+    public boolean verify(File expectedFile, File actualFile) throws RuntimeErrorException {
         try (BufferedReader expectedReader = new BufferedReader(new FileReader(expectedFile));
              BufferedReader actualReader = new BufferedReader(new FileReader(actualFile))) {
 
@@ -24,7 +26,7 @@ public class Verifier implements IVerifier {
             return forSonarLint == null;
         }
         catch (IOException e) {
-            throw new RuntimeException("Error reading file: " + e.getMessage(), e);
+            throw new RuntimeErrorException("Error reading file: " + e.getMessage());
         }
     }
 }

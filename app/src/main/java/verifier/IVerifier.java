@@ -1,5 +1,7 @@
 package verifier;
 
+import exception.RuntimeErrorException;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -12,5 +14,5 @@ public interface IVerifier {
      * @return a boolean that indicates if the files are the same
      * @throws IOException if an error occurs while reading the files
      */
-    boolean verify(File expectedFile, File actualFile) throws IOException;
+    boolean verify(File expectedFile, File actualFile) throws IOException, RuntimeErrorException;
 }

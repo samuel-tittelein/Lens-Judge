@@ -2,6 +2,7 @@ package runner;
 
 import compiler.AbstractCompiler;
 import compiler.ICompiler;
+import exception.RuntimeErrorException;
 import executer.ExecuterProxy;
 import executer.IExecuter;
 import problem.TestCase;
@@ -31,7 +32,7 @@ public class Runner {
      * @throws IOException if an error occurs while writing the output to the file.
      * @throws InterruptedException if the process is interrupted.
      */
-    public boolean verifyProgram() throws IOException, InterruptedException {
+    public boolean verifyProgram() throws IOException, InterruptedException, RuntimeErrorException {
         if (compiledFile == null) {
             compileFile();
         }
@@ -56,7 +57,7 @@ public class Runner {
      * @throws IOException if an error occurs while writing the output to the file.
      * @throws InterruptedException if the process is interrupted.
      */
-    public void runFile() throws IOException, InterruptedException {
+    public void runFile() throws IOException, InterruptedException, RuntimeErrorException {
         if (compiledFile == null) {
             compileFile();
         }
