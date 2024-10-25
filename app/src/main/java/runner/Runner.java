@@ -23,7 +23,7 @@ public class Runner {
     }
 
     public TestCase getTestCase() {
-
+        //This function is not used yet, but we leave it there in case someone needs it in the future
         return testCase;
     }
 
