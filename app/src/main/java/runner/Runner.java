@@ -33,7 +33,13 @@ public class Runner {
             runFile();
         }
         IVerifier verifier = testCase.getVerifier();
-        return verifier.verify(testCase.getOutputFile(), outputFile);
+        try {
+            return verifier.verify(testCase.getOutputFile(), outputFile);
+        } finally {
+            outputFile.delete();
+            compiledFile.delete();
+        }
+
     }
 
     public void compileFile(){

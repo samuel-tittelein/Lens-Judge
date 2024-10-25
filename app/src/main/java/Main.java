@@ -13,7 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import util.InputReader;
 
 public class Main {
 
@@ -21,10 +21,6 @@ public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RED = "\u001B[31m";
-
-    public static final long DEFAULT_TIMEOUT = 1000;
-    public static final IVerifier DEFAULT_VERIFIER = new Verifier();
-    public static final double DEFAULT_PRECISION = 0.1;
 
     public static void printFile(File file) {
         try (FileReader fileReader = new FileReader(file);
@@ -137,19 +133,19 @@ public class Main {
         }
 
         ProblemBuilder pbb = new ProblemBuilder();
-        IVerifier verifier = new Verifier();//readVerifier();
+        IVerifier verifier = InputReader.readVerifier();
         pbb.withVerifier(verifier);
 
         //------------------- TestCase list creation for problem creation --------------------
         List<TestCase> testCases = new ArrayList<>();
-        long timeLimitEachTestCase = 40;//readTimeLimit();
+        long timeLimitEachTestCase = InputReader.readTimeLimit();
         for (File file : files) {
             if (file.isFile() && file.getName().endsWith(".in")) {
 
                 File outFile = new File(
                         file.getAbsolutePath().replace(".in", ".ans")
                 );
-                testCases.add(new TestCase(sourceFile, file, outFile, timeLimitEachTestCase, verifier));//readVerifier()));
+                testCases.add(new TestCase(sourceFile, file, outFile, timeLimitEachTestCase, verifier));
             } else if (file.isFile() && !file.getName().endsWith(".ans")){
                 System.out.println(
                         ANSI_RED + "Warning: Ignoring non-input file: "
@@ -169,7 +165,7 @@ public class Main {
                 .withInputFile(inFile)
                 .withSourceFile(sourceFile)
                 .withTimeInMs(1000)//readTimeLimit())
-                .withVerifier(new Verifier())//readVerifier())// Time limit in ms, 1000ms = 1s
+                .withVerifier(InputReader.readVerifier())// Time limit in ms, 1000ms = 1s
                 .build();
 
         try {
@@ -196,88 +192,4 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
-
-    private static long readTimeLimit() {
-        long timeLimit = DEFAULT_TIMEOUT;
-        System.out.print("Enter the time limit in milliseconds (default "+ timeLimit + ") : ");
-        do {
-            timeLimit = readInt();
-        } while ( timeLimit < 0 );
-        return timeLimit;
-    }
-
-
-    private static IVerifier readVerifier() {
-        System.out.println(
-                "1. Strict verification\n2. Space insensitive verification\n3. Order tolerant verification\n4. Precision tolerant verification\n5. Case sensitive verification"
-        );
-        System.out.print("Enter the verification mode (default : 1. Strict) : ");
-        IVerifier verifier = DEFAULT_VERIFIER;
-        int verifierIndex;
-        do {
-            verifierIndex = readInt();
-        } while (0 > verifierIndex || verifierIndex > 5);
-
-
-        switch (verifierIndex) {
-            case 0, 1:
-                break;
-            case 2:
-                verifier = new SpaceInsensitiveVerifier(verifier);
-                break;
-            case 3:
-                verifier = new OrderTolerantVerifier(verifier);
-                break;
-            case 4:
-                verifier = new PrecisionVerifier(readPrecision());
-                break;
-            case 5:
-                verifier = new CaseInsensitiveVerifier(verifier);
-                break;
-            default:
-                System.out.println(ANSI_RED + "Invalid verification mode. Using default strict verification." + ANSI_RESET);
-        }
-        return verifier;
-    }
-
-    private static double readPrecision() {
-        double precision = DEFAULT_PRECISION;
-        System.out.print("Enter the precision (default "+ DEFAULT_PRECISION +" : ");
-        double ans = readDouble();
-        precision = ans!=0 ? ans : precision;
-        return precision;
-    }
-
-    private static double readDouble() {
-        Scanner sc;
-        double result = -1;
-        do {
-            sc = new Scanner(System.in);
-            if (sc.hasNextDouble()) {
-                result = sc.nextDouble();
-            }
-            if (sc.next().isEmpty()) {
-                result = 0;
-            }
-            if (result < 0) System.out.println(ANSI_RED + "Invalid, retry : " + ANSI_RESET);
-        } while (result < 0);
-        return result;
-    }
-
-    private static int readInt() {
-        Scanner sc;
-        int result = -1;
-        do {
-            sc = new Scanner(System.in);
-            if (sc.hasNextInt()) {
-                result = sc.nextInt();
-            }
-            if (sc.next().isEmpty()) {
-                result = 0;
-            }
-            if (result < 0) System.out.println(ANSI_RED + "Invalid, retry : " + ANSI_RESET);
-        } while (result < 0);
-        return result;
-    }
-
 }
