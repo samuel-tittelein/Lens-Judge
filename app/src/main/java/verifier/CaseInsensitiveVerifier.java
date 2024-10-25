@@ -1,5 +1,7 @@
 package verifier;
 
+import exception.RuntimeErrorException;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +16,8 @@ public class CaseInsensitiveVerifier implements IVerifier{
     }
 
     @Override
-    public boolean verify(File expectedFile, File actualFile) throws IOException {
+    public boolean verify(File expectedFile, File actualFile)
+            throws IOException, RuntimeException, RuntimeErrorException {
         File lowerCaseExpectedFile = createLowerCaseCopy(expectedFile);
         File lowerCaseActualFile = createLowerCaseCopy(actualFile);
 

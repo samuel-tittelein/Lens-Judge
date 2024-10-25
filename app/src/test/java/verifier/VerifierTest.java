@@ -1,5 +1,6 @@
 package verifier;
 
+import exception.RuntimeErrorException;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class VerifierTest {
 
     @Test
-    void verifyTest() throws IOException {
+    void verifyTest() throws IOException, RuntimeErrorException {
         IVerifier verifier = new Verifier();
 
         File expectedFile = getFileFromResources("expected.txt");
