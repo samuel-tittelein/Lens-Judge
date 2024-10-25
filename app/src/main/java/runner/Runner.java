@@ -43,7 +43,6 @@ public class Runner {
             return verifier.verify(testCase.getOutputFile(), outputFile);
         } finally {
             outputFile.delete();
-            compiledFile.delete();
         }
 
     }
@@ -79,5 +78,5 @@ public class Runner {
     public void setCompiledFile(File compiledFile) {
         this.compiledFile = compiledFile;
     }
-
 }
+
