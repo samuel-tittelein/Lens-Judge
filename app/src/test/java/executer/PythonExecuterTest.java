@@ -1,5 +1,6 @@
 package executer;
 
+import exception.RuntimeErrorException;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class PythonExecuterTest {
 
     @Test
-    void testPython() throws IOException, InterruptedException {
+    void testPython() throws IOException, InterruptedException, RuntimeErrorException {
         IExecuter pythonExecuter = new ExecuterProxy();
         pythonExecuter.execute(getFileFromResources("test.py"), getFileFromResources("test.in"), 1000);
         File file = new File("test.py.out");
@@ -26,6 +27,8 @@ class PythonExecuterTest {
             pythonExecuter.execute(getFileFromResources("test.py"), getFileFromResources("test.in"), 1000);
         } catch (InterruptedException e) {
             assertTrue(true);
+        } catch (RuntimeErrorException e) {
+            throw new RuntimeException(e);
         }
 
     }
