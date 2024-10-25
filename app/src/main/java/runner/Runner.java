@@ -10,7 +10,6 @@ import verifier.IVerifier;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class Runner {
     File outputFile;
@@ -23,7 +22,7 @@ public class Runner {
     }
 
     public TestCase getTestCase() {
-        //This function is not used yet, but we leave it there in case someone needs it in the future
+
         return testCase;
     }
 
@@ -41,15 +40,7 @@ public class Runner {
             runFile();
         }
         IVerifier verifier = testCase.getVerifier();
-        try {
-            return verifier.verify(testCase.getOutputFile(), outputFile);
-        } finally {
-            try{
-                Files.delete(outputFile.toPath());
-            }catch(IOException e){
-                System.err.println("Failed to delete outputFile "+e.getMessage());
-            }
-        }
+        return verifier.verify(testCase.getOutputFile(), outputFile);
     }
 
     /**
@@ -83,5 +74,5 @@ public class Runner {
     public void setCompiledFile(File compiledFile) {
         this.compiledFile = compiledFile;
     }
-}
 
+}

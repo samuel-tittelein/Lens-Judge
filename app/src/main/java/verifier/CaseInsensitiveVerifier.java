@@ -16,7 +16,8 @@ public class CaseInsensitiveVerifier implements IVerifier{
     }
 
     @Override
-    public boolean verify(File expectedFile, File actualFile) throws IOException {
+    public boolean verify(File expectedFile, File actualFile)
+            throws IOException, RuntimeException, RuntimeErrorException {
         File lowerCaseExpectedFile = createLowerCaseCopy(expectedFile);
         File lowerCaseActualFile = createLowerCaseCopy(actualFile);
 
