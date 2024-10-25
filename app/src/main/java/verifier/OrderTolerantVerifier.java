@@ -1,5 +1,7 @@
 package verifier;
 
+import exception.RuntimeErrorException;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,6 +25,8 @@ public class OrderTolerantVerifier implements IVerifier {
 
         try {
             return decoratedVerifier.verify(sortedExpectedFile, sortedActualFile);
+        } catch (RuntimeErrorException e) {
+            throw new RuntimeException(e);
         } finally {
             //Need to put a finally to delete the temporary files, Yeah it's weird
             try {
