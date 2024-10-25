@@ -245,4 +245,10 @@ PythonExecuter            -[#008200,dashed]-^  IExecuter
 SpaceInsensitiveVerifier  -[#008200,dashed]-^  IVerifier                
 TimedProcessController    -[#008200,dashed]-^  IProcess                 
 Verifier                  -[#008200,dashed]-^  IVerifier
+Main --* Runner
+ProblemBuilder --> Problem
+RunnerBuilder --> Runner
+CCompilerEnum --^ CCompiler
+TestCase --> Problem
+InputReader --> Main : <<utilise>>
 ```
